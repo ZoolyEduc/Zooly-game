@@ -522,8 +522,6 @@ Uma conta de aluno exclusiva para avaliação será disponibilizada para que pro
 - Loja e personalização de avatares.
 - Acompanhamento do progresso.
 
-> As credenciais serão disponibilizadas após a criação e validação dos dados de teste. Utilize exclusivamente a conta de avaliação fornecida.
-
 ## Status do projeto
 
 O Zooly é um projeto acadêmico desenvolvido no curso de **Desenvolvimento de Software Multiplataforma (DSM)** da **FATEC Registro**.
