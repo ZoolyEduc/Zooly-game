@@ -1,0 +1,13 @@
+node_modules
+.next
+.env
+.env.local
+.DS_Store
+
+# Testes de ponta a ponta (Playwright)
+/test-results/
+/playwright-report/
+/playwright/.cache/
+
+# Gerado automaticamente pelo `next dev` (usado pelos testes)
+AGENTS.md

@@ -1,0 +1,254 @@
+/* Mapa do Vale do Ribeira (referências Mapa*.png). */
+
+.game-frame--mapa {
+  background: #65c6dc;
+}
+
+.game-frame--mapa .game-content {
+  padding: 0;
+  margin-top: -28px;
+}
+
+.mapa-cena {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 450 / 675;
+  overflow: hidden;
+  background: #65c6dc;
+}
+
+.mapa-cena__arte {
+  object-fit: cover;
+}
+
+.mapa-erro {
+  padding: 50px 18px;
+  background: var(--branco);
+}
+
+/* Placa da cidade: área de toque sobre o nome no mapa. */
+.mapa-cidade {
+  position: absolute;
+  z-index: 2;
+  width: 27%;
+  height: 7%;
+  transform: translate(-50%, -50%);
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+}
+
+.mapa-cidade:focus-visible {
+  outline: 3px solid #ffb300;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mapa-cidade__selo {
+  position: absolute;
+  top: -10px;
+  right: -6px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--branco);
+  border-radius: 50%;
+  background: #8a817b;
+  color: var(--branco);
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.mapa-cidade__selo--ok {
+  background: #2fa344;
+}
+
+.mapa-cidade__pulso {
+  position: absolute;
+  inset: -4px;
+  border: 3px solid #ffd54a;
+  border-radius: 20px;
+  animation: pulso-cidade 1.4s ease-in-out infinite;
+}
+
+@keyframes pulso-cidade {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+/* Papagaio no caminho. */
+.mapa-mascote {
+  position: absolute;
+  z-index: 3;
+  width: 19%;
+  transform: translate(-30%, -88%);
+  pointer-events: none;
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.3));
+  transition: left 0.6s ease, top 0.6s ease;
+}
+
+.mapa-mascote img {
+  width: 100%;
+  height: auto;
+}
+
+.mapa-mascote--foco {
+  animation: flutuar 2.4s ease-in-out infinite;
+}
+
+@keyframes flutuar {
+  50% {
+    margin-top: -6px;
+  }
+}
+
+.mapa-trecho {
+  position: absolute;
+  z-index: 4;
+  top: 40px;
+  right: 12px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--verde-texto);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+/* Balões de fala. */
+.balao-mapa {
+  position: absolute;
+  z-index: 5;
+  inset: auto 0 0;
+  padding: 0 12px 22px;
+  pointer-events: none;
+}
+
+.balao-mapa--escuro {
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(20, 20, 20, 0.45);
+}
+
+.balao-mapa__conteudo {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  pointer-events: auto;
+}
+
+.balao-mapa--escuro .balao-mapa__conteudo {
+  flex-direction: row-reverse;
+}
+
+.balao-mapa__mascote {
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.3));
+}
+
+.balao-mapa__fala {
+  position: relative;
+  flex: 1;
+  margin-bottom: 20px;
+  padding: 14px 16px 16px;
+  border: 3px solid #4ab457;
+  border-radius: 24px;
+  background: var(--branco);
+  color: var(--texto);
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.balao-mapa__fala b {
+  display: block;
+  padding: 0 34px;
+  color: var(--verde-texto);
+  font-family: var(--fonte-titulo);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.balao-mapa__fala p {
+  margin: 6px 0 10px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.balao-mapa__fala .botao-pilula {
+  width: 100%;
+}
+
+.balao-mapa__ouvir {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+
+.modal-fase .botao-ouvir {
+  margin-bottom: 12px;
+}
+
+.balao-mapa__fechar {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--verde-suave);
+  color: var(--verde-texto);
+}
+
+/* Janela "Encontramos uma nova aventura" (MapaModalFase). */
+.modal-fase {
+  padding-top: 70px;
+  margin-top: 60px;
+  border: 4px solid #4ab457;
+  background: #fffef7;
+}
+
+.modal-fase__mascote {
+  position: absolute;
+  top: -78px;
+  left: 50%;
+  transform: translateX(-50%);
+  object-fit: contain;
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.25));
+}
+
+.modal-fase__texto {
+  margin: 0 0 6px;
+  color: var(--verde-texto);
+  font-family: var(--fonte-titulo);
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.modal-fase__missao {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--texto);
+}
+
+.modal-fase small {
+  color: var(--texto-suave);
+  font-weight: 700;
+}
+
+.modal-fase .botao-pilula {
+  width: 100%;
+}

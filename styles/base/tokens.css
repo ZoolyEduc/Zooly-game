@@ -1,0 +1,44 @@
+/* Tokens visuais extraídos das referências do Figma (referencias-figma/). */
+:root {
+  /* Verdes */
+  --verde: #16843b;
+  --verde-escuro: #0b6b27;
+  --verde-medio: #3fae49;
+  --verde-vivo: #22c55e;
+  --verde-claro: #dcf9e7;
+  --verde-suave: #eef8ef;
+  --verde-desabilitado: #9edc9f;
+  --verde-texto: #087b31;
+
+  /* Terra e creme */
+  --creme: #fff8e9;
+  --creme-campo: #fffaf0;
+  --marrom: #503019;
+  --marrom-texto: #4b2a13;
+  --amarelo: #ffc72c;
+  --laranja-moeda: #f4a900;
+
+  /* Neutros */
+  --branco: #ffffff;
+  --texto: #2a211b;
+  --texto-suave: #6f6a64;
+  --cinza: #a8a29e;
+  --cinza-claro: #ecebea;
+
+  /* Estados */
+  --erro: #a52b22;
+  --erro-fundo: #fff0e9;
+  --vermelho-sair: #bd1717;
+  --azul: #0874af;
+  --amarelo-desempenho: #c3b100;
+
+  /* Forma */
+  --raio-cartao: 28px;
+  --raio-botao: 40px;
+  --largura-app: 430px;
+  --altura-nav: 88px;
+
+  /* Tipografia */
+  --fonte-texto: "Nunito", "Trebuchet MS", sans-serif;
+  --fonte-titulo: "Fredoka", "Nunito", "Trebuchet MS", sans-serif;
+}

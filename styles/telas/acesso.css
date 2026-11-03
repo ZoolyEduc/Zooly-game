@@ -1,0 +1,733 @@
+/* Splash, login, cadastro e introdução (fundo de floresta). */
+
+.cenario {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, var(--largura-app));
+  min-height: 100svh;
+  margin: 0 auto;
+  overflow: hidden;
+  background: url('/images/cenarios/fundo-floresta.png') center center / cover no-repeat;
+}
+
+.cenario__conteudo {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: 22px 20px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---------- Marca ---------- */
+.marca {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 340px);
+  margin: 5px auto 18px;
+  display: flex;
+  justify-content: center;
+  filter: drop-shadow(0 4px 3px rgba(44, 49, 15, 0.24));
+}
+
+.marca__logo-turma {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.marca--compacta {
+  width: min(100%, 350px);
+  margin: 0 auto -4px;
+}
+
+/* ---------- Splash ---------- */
+.tela-splash .cenario__conteudo {
+  justify-content: center;
+}
+
+.splash__centro {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.splash__centro .marca {
+  width: min(100%, 365px);
+  margin-bottom: 18px;
+}
+
+.splash__mensagem {
+  margin: 12px 0 20px;
+  color: var(--branco);
+  font-weight: 900;
+  font-size: 19px;
+  text-shadow: 0 2px 4px #174d20;
+}
+
+.splash__pontos {
+  display: flex;
+  gap: 10px;
+}
+
+.splash__pontos span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #fff4d5;
+  animation: pulso 1s infinite alternate;
+}
+
+.splash__pontos span:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.splash__pontos span:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+@keyframes pulso {
+  to {
+    transform: translateY(-7px);
+    background: var(--amarelo);
+  }
+}
+
+.link-pular,
+.link-secundario {
+  margin-top: 18px;
+  padding: 6px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--branco);
+  font-weight: 900;
+  text-decoration: underline;
+  text-shadow: 0 1px 4px #24502c;
+}
+
+/* ---------- Introdução ---------- */
+.introducao__topo {
+  position: relative;
+  width: 100%;
+  min-height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progresso-etapas {
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.progresso-etapas span {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #e7f3f7;
+  box-shadow: 0 1px 3px #35647b;
+}
+
+.progresso-etapas span:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 5px;
+  width: 21px;
+  height: 4px;
+  border-radius: 5px;
+  background: #f5fbff;
+}
+
+.progresso-etapas span.ativo {
+  background: #74411d;
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.som-botao {
+  position: absolute;
+  right: 0;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 3px solid #d4f4ce;
+  border-radius: 50%;
+  color: var(--branco);
+  background: #168a3d;
+  font-size: 22px;
+  box-shadow: 0 3px 8px #174d35;
+}
+
+.tela-introducao .marca {
+  width: min(100%, 335px);
+  margin: 0 auto 12px;
+}
+
+.painel-introducao {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: 23px 22px 24px;
+  border: 4px solid var(--branco);
+  border-radius: var(--raio-cartao);
+  background: var(--creme);
+  box-shadow: 0 6px 0 rgba(224, 173, 85, 0.65);
+  text-align: center;
+}
+
+.painel-introducao h1 {
+  margin: 0 0 8px;
+  color: var(--marrom-texto);
+  font-family: var(--fonte-titulo);
+  font-size: clamp(21px, 5.5vw, 25px);
+  font-weight: 700;
+  line-height: 1.22;
+}
+
+.painel-introducao p {
+  margin: 0;
+  color: #5b3a21;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.painel-introducao--amigos {
+  padding: 16px 18px 17px;
+}
+
+.painel-introducao--amigos h1 {
+  font-size: 20px;
+}
+
+.painel-introducao--amigos p {
+  font-size: 13px;
+}
+
+.enfeite {
+  position: absolute;
+  top: 4px;
+  color: #ff9f00;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.enfeite--esquerda {
+  left: 13px;
+}
+
+.enfeite--direita {
+  right: 13px;
+}
+
+/* Mascotes espalhados pela trilha (Abertura-2). */
+.amigos-trilha {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  margin-top: 6px;
+}
+
+.amigo {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.amigo img {
+  width: 92px;
+  height: 104px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 2px rgba(0, 0, 0, 0.2));
+}
+
+.amigo b {
+  min-width: 78px;
+  margin-top: -6px;
+  padding: 4px 12px;
+  border: 2px solid #fff4d0;
+  border-radius: 25px;
+  background: #ffe3a0;
+  box-shadow: 0 3px 0 #c98b2a;
+  color: #553313;
+  font-size: 12px;
+  text-align: center;
+}
+
+.amigo--lagarto {
+  left: 4%;
+  top: 0;
+}
+
+.amigo--cobra {
+  left: 38%;
+  top: 8px;
+}
+
+.amigo--sarue {
+  left: 30%;
+  top: 122px;
+}
+
+.amigo--papagaio {
+  right: 2%;
+  top: 112px;
+}
+
+/* Etapas de guia: mapa e missões. */
+.guia-cartao {
+  width: 100%;
+  margin: 14px 0 0;
+  padding: 14px;
+  border: 4px solid var(--branco);
+  border-radius: var(--raio-cartao);
+  background: rgba(255, 248, 233, 0.94);
+  box-shadow: 0 6px 0 rgba(224, 173, 85, 0.65);
+}
+
+.guia-cartao:not(.guia-passos) {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.guia-mapa {
+  flex: 0 0 auto;
+  width: 112px;
+  height: auto;
+  border-radius: 16px;
+  border: 3px solid var(--branco);
+}
+
+.guia-legenda,
+.guia-passos {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.guia-legenda {
+  margin: 0;
+  padding: 0;
+}
+
+.guia-legenda li,
+.guia-passos li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--marrom-texto);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.guia-icone {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--branco);
+  font-size: 16px;
+}
+
+.guia-icone--disponivel {
+  border: 3px solid #ffd54a;
+  animation: pulso-cidade 1.4s ease-in-out infinite;
+}
+
+.guia-icone--trancada {
+  border: 2px solid var(--branco);
+  background: #8a817b;
+}
+
+.guia-icone--feita {
+  border: 2px solid var(--branco);
+  background: #2fa344;
+}
+
+.guia-passos__icone {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--branco);
+  font-size: 24px;
+}
+
+.acoes-introducao {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.botao-voltar {
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--branco);
+  border-radius: 50%;
+  color: #603c1d;
+  background: #fff1d2;
+  font-size: 24px;
+  box-shadow: 0 3px 0 #d8b77a;
+}
+
+/* ---------- Formulários (login e cadastro) ---------- */
+.tela-formulario .cenario__conteudo {
+  justify-content: center;
+}
+
+.formulario-marca {
+  width: 100%;
+  margin-top: 0;
+}
+
+.cartao-formulario {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 24px 15px 18px;
+  border: 4px solid var(--branco);
+  border-radius: var(--raio-cartao);
+  background: #fffefa;
+  box-shadow: 0 5px 0 rgba(231, 175, 135, 0.55);
+}
+
+.cartao-cadastro {
+  margin-top: -4px;
+}
+
+/* No primeiro acesso, o fundo fica mais claro (referência PrimeiroAcesso). */
+.tela-cadastro--primeiro::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.campo-grupo {
+  margin-bottom: 13px;
+}
+
+.campo-grupo > label,
+.campo-grupo > legend {
+  width: 100%;
+  margin: 0 0 6px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #554536;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.campo-numero {
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dceee1;
+  color: #35664b;
+  font-size: 12px;
+}
+
+.campo-grupo small {
+  margin-left: auto;
+  color: #c52d2d;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.campo-grupo small.info {
+  color: #1f8f99;
+}
+
+.campo {
+  min-height: 54px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid #d9eadb;
+  border-radius: 16px;
+  background: var(--creme-campo);
+  color: #286b46;
+}
+
+.campo svg {
+  flex: 0 0 auto;
+  font-size: 18px;
+  stroke-width: 2.3;
+}
+
+.campo input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #483a2c;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.campo:focus-within {
+  border-color: #6fc07a;
+}
+
+.campo input::placeholder {
+  color: #9f968b;
+  font-weight: 700;
+}
+
+.campo input:read-only {
+  color: #746d63;
+}
+
+.ajuda-campo {
+  margin: 5px 4px 0;
+  color: #857a6f;
+  font-size: 11px;
+}
+
+.opcoes-sexo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.opcao-sexo {
+  position: relative;
+  min-height: 54px;
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid #f4c6b5;
+  border-radius: 17px;
+  color: #594a3c;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.opcao-sexo.masculino {
+  border-color: #b8e1df;
+}
+
+.opcao-sexo input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.opcao-sexo:focus-within {
+  outline: 3px solid #ffb300;
+  outline-offset: 2px;
+}
+
+.opcao-sexo__icone {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #ffeadf;
+  color: #f18b6b;
+  font-size: 18px;
+}
+
+.opcao-sexo.masculino .opcao-sexo__icone {
+  background: #e4f2ef;
+  color: #36a4a4;
+}
+
+.opcao-sexo__marca {
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  border: 2px solid #d3c9be;
+  border-radius: 50%;
+}
+
+.opcao-sexo.selecionado {
+  background: #fff8ee;
+  box-shadow: 0 0 0 2px #df9d70;
+}
+
+.opcao-sexo.selecionado .opcao-sexo__marca {
+  border: 5px solid #df9d70;
+}
+
+.opcao-sexo.masculino.selecionado {
+  box-shadow: 0 0 0 2px #56b7b5;
+}
+
+.opcao-sexo.masculino.selecionado .opcao-sexo__marca {
+  border-color: #56b7b5;
+}
+
+.botao-salvar {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 58px;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 0;
+  border-radius: 15px;
+  color: var(--branco);
+  background: #28654d;
+  box-shadow: 0 5px 0 #174833;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.botao-salvar:disabled {
+  opacity: 0.65;
+}
+
+.tela-cadastro .link-secundario {
+  position: relative;
+  z-index: 1;
+  margin-top: 14px;
+}
+
+/* Login */
+.tela-login .cenario__conteudo {
+  justify-content: center;
+  padding-top: 24px;
+  padding-bottom: 35px;
+}
+
+.login-conteudo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-conteudo .marca {
+  width: min(100%, 355px);
+  margin: 0 auto -8px;
+}
+
+.cartao-login {
+  width: 94%;
+  min-height: 300px;
+  padding: 30px 24px 40px;
+  border: 4px solid var(--branco);
+  border-radius: 30px 30px 48px 48px;
+  background: #fffefa;
+  box-shadow: 0 6px 0 rgba(228, 163, 139, 0.6);
+}
+
+.cartao-login > label {
+  display: block;
+  margin: 7px 0 8px;
+  color: #4d5849;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.campo-login {
+  min-height: 64px;
+  margin-bottom: 24px;
+  padding: 0 14px;
+  border-radius: 17px;
+}
+
+.campo-login svg {
+  font-size: 22px;
+  color: var(--verde-texto);
+}
+
+.campo-login input {
+  font-size: 20px;
+}
+
+.botao-entrar {
+  width: 94%;
+  margin-top: 42px;
+  flex: none;
+}
+
+.login-conteudo .link-secundario {
+  margin-top: 16px;
+}
+
+@media (max-height: 740px) {
+  .cenario__conteudo {
+    padding-top: 12px;
+    padding-bottom: 14px;
+  }
+
+  .tela-introducao .marca {
+    width: 260px;
+    margin-bottom: 8px;
+  }
+
+  .amigos-trilha {
+    height: 220px;
+  }
+
+  .painel-introducao {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .cartao-cadastro {
+    padding-top: 17px;
+  }
+
+  .campo-grupo {
+    margin-bottom: 9px;
+  }
+
+  .campo {
+    min-height: 48px;
+  }
+
+  .botao-entrar {
+    margin-top: 24px;
+  }
+}
+
+@media (min-width: 600px) {
+  .cenario {
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+  }
+}

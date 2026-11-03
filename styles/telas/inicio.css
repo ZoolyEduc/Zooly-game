@@ -1,0 +1,199 @@
+/* Home / Aventura (referência Home.png). */
+
+.home-saudacao h1 {
+  margin: 2px 0 16px;
+  color: var(--verde-texto);
+  font-family: var(--fonte-titulo);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.home-boas-vindas {
+  min-height: 96px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-radius: 22px;
+  background: var(--branco);
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.06);
+}
+
+.home-boas-vindas img {
+  object-fit: contain;
+}
+
+.home-boas-vindas__texto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.home-boas-vindas p {
+  margin: 0;
+  color: var(--texto);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.rotulo-secao {
+  margin: 24px 6px 10px;
+  color: var(--verde-texto);
+  font-family: var(--fonte-titulo);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+}
+
+.lista-missoes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.missao {
+  width: 100%;
+  min-height: 88px;
+  padding: 12px 4px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 0;
+  border-bottom: 4px solid #eee;
+  background: var(--branco);
+  color: #503a30;
+  text-align: left;
+}
+
+.missao__icone {
+  width: 48px;
+  height: 56px;
+  flex: 0 0 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 26px;
+  background: var(--cinza-claro);
+  color: #9a948e;
+  font-size: 24px;
+  box-shadow: 0 4px 0 #d6d3cf;
+}
+
+.missao__titulo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.missao__titulo b {
+  font-family: var(--fonte-titulo);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.missao__titulo small {
+  color: var(--texto-suave);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.missao__acao {
+  min-width: 48px;
+  color: var(--verde-medio);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.missao--concluida {
+  border-color: #a8f0bf;
+}
+
+.missao--concluida .missao__icone {
+  background: #4ab457;
+  color: var(--branco);
+  box-shadow: 0 4px 0 #2f8a3c;
+}
+
+.missao--concluida .missao__titulo small {
+  color: #198b3c;
+}
+
+.missao--andamento,
+.missao--disponivel {
+  border-color: #ffd39d;
+}
+
+.missao--andamento .missao__icone,
+.missao--disponivel .missao__icone {
+  background: #c9b200;
+  color: var(--branco);
+  box-shadow: 0 4px 0 #9c8a00;
+}
+
+.missao--andamento .missao__titulo small,
+.missao--disponivel .missao__titulo small,
+.missao--disponivel .missao__acao,
+.missao--andamento .missao__acao {
+  color: #8a7c00;
+}
+
+.missao--bloqueada .missao__titulo b {
+  color: #8a817b;
+}
+
+.cartao-progresso {
+  margin: 22px 0 0;
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+  border-radius: 20px;
+  background: #f4fbf4;
+  color: #26783e;
+  font-weight: 900;
+}
+
+.cartao-progresso small {
+  color: #6f746d;
+  font-weight: 700;
+}
+
+/* Treino e guia: separado da lista de missões oficiais. */
+.cartao-treino {
+  margin: 22px 0 0;
+  padding: 16px;
+  border: 2px dashed #e2c766;
+  border-radius: 20px;
+  background: #fffaf0;
+}
+
+.cartao-treino h2 {
+  margin: 0 0 4px;
+  color: var(--marrom-texto);
+  font-family: var(--fonte-titulo);
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.cartao-treino p {
+  margin: 0 0 12px;
+  color: var(--texto);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.cartao-treino__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cartao-treino__acoes .botao-pilula {
+  flex: 1 1 140px;
+}

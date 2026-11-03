@@ -1,0 +1,122 @@
+/* Configurações (referência Configuracoes.png). */
+
+.perfil {
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--verde);
+  text-align: center;
+}
+
+.perfil__avatar {
+  width: 130px;
+  height: 130px;
+  display: grid;
+  place-items: center;
+  border: 6px solid var(--verde);
+  border-radius: 50%;
+  background: var(--branco);
+  box-shadow: 0 6px 0 #a9d6bd;
+}
+
+.perfil__avatar img {
+  object-fit: contain;
+}
+
+.perfil > b {
+  margin-top: 10px;
+  font-family: var(--fonte-titulo);
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.perfil > span {
+  margin-top: 4px;
+  color: #6f766e;
+  font-weight: 800;
+}
+
+.perfil__erro {
+  margin-top: 6px;
+  color: var(--erro);
+  font-weight: 700;
+}
+
+.cartao-config {
+  width: 100%;
+  min-height: 104px;
+  margin: 0 0 20px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 4px solid #4ab457;
+  border-radius: 32px;
+  background: var(--branco);
+  color: #258048;
+  text-align: left;
+  box-shadow: 0 5px 0 #27904a;
+}
+
+.cartao-config > svg {
+  margin-left: auto;
+  flex: 0 0 auto;
+  font-size: 22px;
+}
+
+.cartao-config__icone {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e6f6e8;
+  font-size: 28px;
+}
+
+.cartao-config__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--marrom);
+}
+
+.cartao-config__texto b {
+  font-size: 17px;
+}
+
+.cartao-config__texto small {
+  color: #6f766c;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.cartao-config--pais {
+  border-color: #c3b100;
+  background: #fff8e9;
+  box-shadow: 0 5px 0 #b5a700;
+  color: #6b6000;
+}
+
+.cartao-config--pais .cartao-config__icone {
+  background: #fff;
+}
+
+.botao-sair {
+  width: 100%;
+  min-height: 72px;
+  margin: 18px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 4px solid #9f0909;
+  border-radius: 45px;
+  background: var(--vermelho-sair);
+  color: var(--branco);
+  font-size: 16px;
+  font-weight: 900;
+  box-shadow: 0 5px 0 #7a0606;
+}

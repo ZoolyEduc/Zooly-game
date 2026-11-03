@@ -1,0 +1,453 @@
+/* Atividades (referências AtividadeFase01 a AtividadeFase04*). */
+
+.tela-atividade {
+  position: relative;
+  width: min(100%, var(--largura-app));
+  min-height: 100svh;
+  margin: 0 auto;
+  padding-bottom: calc(120px + env(safe-area-inset-bottom));
+  background: var(--branco);
+  color: #211915;
+}
+
+.tela-atividade__selo {
+  width: fit-content;
+  margin: 12px auto 0;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #fff3c4;
+  color: #6b4d00;
+  font-size: 13px;
+  font-weight: 900;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 10px;
+}
+
+.tela-atividade__sair {
+  min-height: 36px;
+  padding: 4px 12px;
+  border: 2px solid #e2c766;
+  border-radius: 18px;
+  background: var(--branco);
+  color: #6b4d00;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.atividade-progresso {
+  margin-top: 16px;
+  padding: 0 25px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  color: var(--verde-texto);
+  font-weight: 900;
+}
+
+.atividade-progresso .barra-progresso {
+  grid-column: 1 / -1;
+}
+
+.tela-atividade__conteudo {
+  padding: 0 4px;
+}
+
+.atividade-titulo {
+  margin: 16px 20px 4px;
+  color: #007425;
+  font-family: var(--fonte-titulo);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.04;
+  text-align: center;
+}
+
+.atividade-titulo__icone {
+  font-size: 0.85em;
+}
+
+.atividade-subtitulo {
+  margin: 8px 30px 4px;
+  color: #4c554a;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* Fase 1 — História. A ilustração usa o cenário de floresta (a arte do rio do
+   Figma não foi fornecida; o caminho antigo apontava para um arquivo inexistente). */
+.historia-arte {
+  height: 170px;
+  margin: 14px auto;
+  width: min(72%, 280px);
+  border: 5px solid #4ab457;
+  border-radius: 34px;
+  background: linear-gradient(0deg, rgba(36, 94, 73, 0.35), rgba(36, 94, 73, 0.05)),
+    url('/images/cenarios/fundo-floresta.png') center 62% / cover;
+}
+
+.historia-cartao {
+  margin: 8px 17px;
+  padding: 18px 16px 22px;
+  border: 2px solid #4ab457;
+  border-radius: 32px;
+  text-align: center;
+}
+
+.historia-cartao p {
+  margin: 10px 0 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.9;
+}
+
+/* Fase 2 — Áudio */
+.cartao-som {
+  min-height: 280px;
+  margin: 12px 25px 0;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+  border: 4px solid #4ab457;
+  border-radius: 34px;
+  box-shadow: 0 5px 0 #cce5ce;
+}
+
+.cartao-som h2 {
+  margin: 0;
+  font-size: 21px;
+}
+
+.cartao-som > b {
+  color: var(--verde-texto);
+  letter-spacing: 2px;
+}
+
+.botao-som {
+  width: 124px;
+  height: 124px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #4ab457;
+  color: var(--branco);
+  font-size: 52px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.13);
+}
+
+/* Fase 3 — Palavra / Fase 4 — Fala */
+.palavra-pista {
+  position: relative;
+  width: 220px;
+  height: 132px;
+  margin: 30px auto 0;
+  display: grid;
+  place-items: center;
+  border: 4px dashed #4ab457;
+  border-radius: 34px;
+  background: #eef7ef;
+  color: #0a5c22;
+  font-family: var(--fonte-titulo);
+  font-size: 60px;
+  font-weight: 700;
+  letter-spacing: 6px;
+}
+
+.palavra-pista__ouvir {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 14px;
+  background: #8bb9ff;
+  color: #064b8c;
+  font-size: 20px;
+}
+
+.botao-falei {
+  margin: 24px auto 0;
+  padding: 16px 26px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 40px;
+  background: var(--verde-escuro);
+  color: var(--branco);
+  font-size: 17px;
+  font-weight: 800;
+  box-shadow: 0 5px 0 #c8d6c9;
+}
+
+.botao-falei--ok {
+  background: var(--verde-medio);
+}
+
+/* Alternativas */
+.alternativas {
+  margin: 26px 18px 0;
+}
+
+.alternativas--curtas {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.alternativas--curtas button {
+  width: 92px;
+  height: 84px;
+  border: 0;
+  border-radius: 26px;
+  background: var(--branco);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.13);
+  color: var(--texto);
+  font-family: var(--fonte-titulo);
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.alternativas--lista {
+  display: grid;
+  gap: 12px;
+}
+
+.alternativas--lista button {
+  min-height: 60px;
+  padding: 12px 18px;
+  border: 3px solid #e3efe4;
+  border-radius: 22px;
+  background: var(--branco);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  color: var(--texto);
+  font-size: 18px;
+  font-weight: 800;
+  text-align: left;
+}
+
+.alternativas button.selecionada {
+  border-color: #3a9a45;
+  background: #4ab457;
+  color: var(--branco);
+}
+
+.alternativas button:disabled:not(.selecionada) {
+  opacity: 0.6;
+}
+
+.cartao-pergunta {
+  margin: 16px 20px 0;
+  padding: 18px;
+  border: 3px solid #4ab457;
+  border-radius: 28px;
+  text-align: center;
+}
+
+.cartao-pergunta p {
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+/* Retorno com o papagaio (Fase04FeedBack). */
+.feedback-mascote {
+  margin: 18px 20px 0;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 2px solid #eee0c8;
+  border-radius: 24px;
+  background: #fff6e5;
+}
+
+.feedback-mascote img {
+  flex: 0 0 auto;
+  border-radius: 14px;
+  background: #ffe7a8;
+  object-fit: contain;
+}
+
+.feedback-mascote b {
+  color: #7a5a00;
+  font-size: 16px;
+}
+
+.feedback-mascote p {
+  margin: 6px 0 0;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.feedback-mascote--tentar {
+  border-color: #f6d3c6;
+  background: var(--erro-fundo);
+}
+
+.feedback-mascote--tentar b {
+  color: var(--erro);
+}
+
+.ganho-moedas b {
+  color: var(--verde-texto);
+  font-size: 20px;
+}
+
+.recompensa-missao {
+  margin: 14px 18px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: var(--marrom-texto);
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.recompensa-missao b {
+  color: var(--verde-texto);
+}
+
+/* Botão principal fixo no rodapé */
+.tela-atividade__rodape {
+  position: fixed;
+  z-index: 10;
+  left: 50%;
+  bottom: 0;
+  width: min(100%, var(--largura-app));
+  padding: 14px 25px calc(26px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0), #fff 30%);
+}
+
+.botao-atividade {
+  width: 100%;
+  min-height: 66px;
+  border: 0;
+  border-radius: 48px;
+  background: #4ab457;
+  color: var(--branco);
+  font-family: var(--fonte-titulo);
+  font-size: 26px;
+  font-weight: 600;
+  box-shadow: 0 4px 0 #2f8a3c;
+}
+
+.botao-atividade--escuro {
+  background: var(--verde-escuro);
+  box-shadow: 0 4px 0 #064818;
+}
+
+.botao-atividade:disabled {
+  background: var(--verde-desabilitado);
+  box-shadow: none;
+}
+
+@media (max-width: 370px) {
+  .atividade-titulo {
+    font-size: 29px;
+  }
+
+  .alternativas--curtas button {
+    width: 78px;
+  }
+
+  .palavra-pista {
+    font-size: 50px;
+  }
+}
+
+@media (max-height: 700px) {
+  .cartao-som {
+    min-height: 220px;
+  }
+
+  .botao-som {
+    width: 96px;
+    height: 96px;
+    font-size: 40px;
+  }
+}
+
+/* ---------- Tentativas: retomada, repetição e histórico ---------- */
+.aviso-tentativa {
+  margin: 12px 18px 0;
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  border-radius: 20px;
+  background: var(--creme);
+  border: 2px solid var(--amarelo);
+  color: var(--marrom-texto);
+}
+
+.aviso-tentativa--retomada {
+  background: var(--verde-suave);
+  border-color: var(--verde-medio);
+}
+
+.aviso-tentativa b {
+  font-family: var(--fonte-titulo);
+  font-size: 18px;
+}
+
+.aviso-tentativa__vez {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--branco);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.aviso-tentativa p {
+  width: 100%;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.historico-tentativas {
+  margin: 16px 18px 0;
+  padding: 12px 16px;
+  border-radius: 20px;
+  background: var(--branco);
+  color: var(--marrom-texto);
+  text-align: center;
+}
+
+.historico-tentativas ul {
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.historico-tentativas li {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--cinza-claro);
+  font-weight: 800;
+}
+
+.historico-tentativas li.historico-tentativas__oficial {
+  background: var(--verde-claro);
+  color: var(--verde-texto);
+}

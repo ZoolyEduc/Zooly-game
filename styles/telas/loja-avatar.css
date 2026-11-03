@@ -1,0 +1,252 @@
+/* Loja (AvatarLoja.png) e edição de avatar (AvatarEditar.png). */
+
+.loja-banner {
+  min-height: 90px;
+  margin-bottom: 22px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 3px solid #a65d2b;
+  border-radius: 26px;
+  background: linear-gradient(135deg, #f0a160, #b86a33);
+  box-shadow: 0 5px 0 #7d4219;
+  color: var(--branco);
+}
+
+.loja-banner img {
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.loja-banner p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.35;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.grade-avatares {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  list-style: none;
+}
+
+.cartao-avatar {
+  padding: 12px 10px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-radius: 24px;
+  background: var(--branco);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.cartao-avatar > b {
+  color: var(--texto);
+  font-family: var(--fonte-titulo);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.botao-preco {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 14px;
+  background: #1b7f3b;
+  color: var(--branco);
+  font-weight: 900;
+  font-size: 17px;
+  box-shadow: 0 4px 0 #0f5527;
+}
+
+.cartao-avatar__estado {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #8a817b;
+  font-weight: 900;
+}
+
+.cartao-avatar__estado--ok {
+  color: var(--verde-texto);
+}
+
+.cartao-avatar__falta {
+  margin-top: -4px;
+  color: #a06b00;
+  font-weight: 800;
+}
+
+.loja-link-avatar {
+  margin: 20px 0 0;
+  text-align: center;
+  font-weight: 700;
+}
+
+.loja-link-avatar a {
+  color: var(--verde-texto);
+  font-weight: 900;
+}
+
+.extrato {
+  margin-top: 20px;
+  padding: 14px 16px;
+  border: 3px solid #f3ece0;
+  border-radius: 22px;
+}
+
+.extrato h2 {
+  margin: 0 0 8px;
+  color: var(--verde-texto);
+  font-family: var(--fonte-titulo);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.extrato ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.extrato li {
+  padding: 8px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid #f3ece0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.extrato li:last-child {
+  border: 0;
+}
+
+.extrato__ganho {
+  color: var(--verde-texto);
+}
+
+.extrato__gasto {
+  color: var(--erro);
+}
+
+.modal-compra h2 {
+  margin: 14px 0 6px;
+  font-family: var(--fonte-titulo);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+.modal-compra__preco {
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.modal-compra small {
+  color: var(--texto-suave);
+  font-weight: 700;
+}
+
+/* Edição de avatar */
+.avatar-instrucao {
+  margin: 8px 0 22px;
+  color: var(--texto);
+  font-weight: 700;
+  text-align: center;
+}
+
+.opcao-avatar {
+  width: 100%;
+  padding: 8px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  border-radius: 22px;
+  background: transparent;
+  color: var(--texto);
+}
+
+.opcao-avatar > b {
+  font-family: var(--fonte-titulo);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.opcao-avatar--ativo {
+  background: #f3fbf3;
+}
+
+.selo-selecionado,
+.selo-loja {
+  padding: 3px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.selo-selecionado {
+  background: #e3f7e7;
+  color: var(--verde-texto);
+}
+
+.selo-loja {
+  background: #f2efe9;
+  color: #7b726a;
+}
+
+.botao-confirmar-escolha {
+  width: 100%;
+  min-height: 58px;
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 40px;
+  background: var(--verde-escuro);
+  color: var(--branco);
+  font-size: 16px;
+  font-weight: 900;
+  box-shadow: 0 4px 0 #064818;
+}
+
+.botao-confirmar-escolha:disabled {
+  background: var(--verde-desabilitado);
+  box-shadow: none;
+}
+
+@media (max-width: 370px) {
+  .grade-avatares {
+    gap: 10px;
+  }
+
+  .retrato-mascote {
+    width: 108px !important;
+    height: 108px !important;
+  }
+}

@@ -1,0 +1,166 @@
+/* Moldura das telas do jogo (Home, Mapa, Loja, Configurações, Painel). */
+.game-frame {
+  position: relative;
+  width: min(100%, var(--largura-app));
+  min-height: 100svh;
+  margin: 0 auto;
+  padding-bottom: calc(var(--altura-nav) + 16px + env(safe-area-inset-bottom));
+  background: var(--branco);
+  box-shadow: 0 0 34px rgba(0, 0, 0, 0.12);
+}
+
+.game-frame--sem-nav {
+  padding-bottom: 24px;
+}
+
+.game-content {
+  padding: 26px 20px 24px;
+}
+
+/* ---------- Cabeçalho ---------- */
+.game-header {
+  position: relative;
+  z-index: 2;
+  min-height: 76px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 0 0 28px 28px;
+  background: var(--verde-claro);
+  box-shadow: 0 4px 0 #a9d6bd;
+  color: var(--verde-texto);
+}
+
+.game-header__avatar {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--branco);
+}
+
+.game-header__avatar img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.game-header__nome {
+  max-width: 180px;
+  font-family: var(--fonte-titulo);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* ---------- Navegação inferior ---------- */
+.bottom-nav {
+  position: fixed;
+  z-index: 20;
+  bottom: 0;
+  left: 50%;
+  width: min(100%, var(--largura-app));
+  height: calc(var(--altura-nav) + env(safe-area-inset-bottom));
+  padding: 10px 12px calc(15px + env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  transform: translateX(-50%);
+  border-radius: 28px 28px 0 0;
+  background: var(--branco);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.bottom-nav a {
+  min-width: 70px;
+  min-height: 56px;
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 28px;
+  /* Cinza escuro (5,3:1 sobre branco): o tom do Figma ficava abaixo do contraste mínimo. */
+  color: var(--texto-suave);
+  font-family: var(--fonte-titulo);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-decoration: none;
+}
+
+.bottom-nav svg {
+  font-size: 24px;
+  stroke-width: 2.4;
+}
+
+.bottom-nav a.ativo {
+  background: var(--verde-vivo);
+  color: var(--branco);
+  box-shadow: 0 3px 0 #07863a;
+}
+
+/* ---------- Faixa de título ---------- */
+.page-title {
+  position: relative;
+  margin: -26px -20px 22px;
+  padding: 18px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 4px solid #9bea9f;
+  background: #efffee;
+}
+
+.page-title h1 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--texto);
+}
+
+.page-title button {
+  position: absolute;
+  left: 16px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #cefbd0;
+  color: var(--verde-texto);
+  font-size: 22px;
+}
+
+@media (max-width: 370px) {
+  .game-content {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .page-title {
+    margin-left: -14px;
+    margin-right: -14px;
+  }
+
+  .game-header__nome {
+    font-size: 16px;
+  }
+
+  .bottom-nav a {
+    min-width: 60px;
+    padding: 6px;
+  }
+}
+
+@media (min-width: 600px) {
+  .game-frame {
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+  }
+}
