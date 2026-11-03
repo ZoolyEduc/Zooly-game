@@ -496,6 +496,33 @@ O Zooly Game está publicado na Vercel.
 **Aplicação em produção:** https://zooly-game.vercel.app
 
 A aplicação utiliza a variável `NEXT_PUBLIC_API_URL` para se comunicar com a API publicada no Render.
+## Acesso para avaliação
+
+O Zooly Game está disponível para avaliação por meio do ambiente publicado.
+
+**Endereço:** https://zooly-game.vercel.app
+
+### Conta de aluno para testes
+
+Uma conta de aluno exclusiva para avaliação será disponibilizada para que professores e avaliadores possam explorar as funcionalidades do jogo.
+
+| Campo | Informação |
+|---|---|
+| RA do aluno | 112750450sp |
+| Senha de acesso da turma | 12345 |
+| Código da turma | TUR-6E2772697D59 |
+
+**Funcionalidades disponíveis para avaliação:**
+- Acesso ao jogo.
+- Introdução guiada.
+- Mapa interativo.
+- Missões educativas.
+- Histórias e perguntas.
+- Sistema de moedas e recompensas.
+- Loja e personalização de avatares.
+- Acompanhamento do progresso.
+
+> As credenciais serão disponibilizadas após a criação e validação dos dados de teste. Utilize exclusivamente a conta de avaliação fornecida.
 
 ## Status do projeto
 
