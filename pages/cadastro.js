@@ -9,14 +9,12 @@ import {
   atualizarUsuario,
   cadastroPendente,
   definirIntroPendente,
-  limparPrimeiroAcesso,
   limparSessao,
   marcarCadastroConcluido,
-  obterPrimeiroAcesso,
   obterToken,
   obterUsuario
 } from '../services/sessao';
-import { concluirCadastroInicial, entrarNaTurma } from '../services/auth';
+import { cadastrarAluno, concluirCadastroInicial } from '../services/auth';
 import { mensagemErroApi, statusDoErro } from '../services/erros';
 
 // Devolve a primeira pendência do formulário, para a criança corrigir um campo por vez.
@@ -49,33 +47,32 @@ export default function Cadastro() {
   const [erro, setErro] = useState('');
   const [carregando, setCarregando] = useState(false);
   const [origem, setOrigem] = useState('');
-  const [credenciais, setCredenciais] = useState(null);
   const router = useRouter();
 
-  // A origem do cadastro depende do armazenamento do navegador (indisponível na pré-renderização).
+  // Origens do cadastro:
+  // - 'novo': primeiro acesso, sem sessão e sem senha;
+  // - 'cadastro-pendente': aluno criado pela professora, que já entrou com a senha da turma.
+  // A origem depende do armazenamento do navegador (indisponível na pré-renderização).
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    const primeiroAcesso = obterPrimeiroAcesso();
-    if (primeiroAcesso?.ra && primeiroAcesso?.senha) {
-      setOrigem('primeiro-acesso');
-      setCredenciais(primeiroAcesso);
-      setRa(primeiroAcesso.ra);
+    if (!obterToken()) {
+      setOrigem('novo');
       return;
     }
 
     const usuario = obterUsuario();
-    if (obterToken() && cadastroPendente() && usuario?.ra) {
+    if (cadastroPendente() && usuario?.ra) {
       setOrigem('cadastro-pendente');
       setRa(usuario.ra);
       return;
     }
 
+    // Aluno já cadastrado e com sessão: o login o leva adiante.
     router.replace(ROTAS.login);
   }, [router]);
   /* eslint-enable react-hooks/set-state-in-effect */
 
   function voltarAoLogin() {
-    if (origem === 'primeiro-acesso') limparPrimeiroAcesso();
     if (origem === 'cadastro-pendente') limparSessao();
     router.push(ROTAS.login);
   }
@@ -92,27 +89,17 @@ export default function Cadastro() {
 
     setCarregando(true);
     try {
-      if (origem === 'primeiro-acesso') {
-        if (!credenciais?.senha) {
-          setErro('Sua sessão de primeiro acesso expirou. Volte ao login e tente novamente.');
-          return;
-        }
-
-        const entrada = await entrarNaTurma({
+      if (origem === 'novo') {
+        await cadastrarAluno({
           ra: ra.trim(),
           codigoPermanente: codigo.trim().toUpperCase(),
-          senha: credenciais.senha
+          nomeCompleto: nome.trim(),
+          sexo
         });
-
-        limparPrimeiroAcesso();
-        setCredenciais(null);
-
-        if (!entrada.cadastroInicialPendente) {
-          router.replace(ROTAS.inicio);
-          return;
-        }
-
-        setOrigem('cadastro-pendente');
+        // A introdução aparece logo depois do primeiro login.
+        definirIntroPendente(true);
+        router.replace(`${ROTAS.login}?cadastro=ok&ra=${encodeURIComponent(ra.trim())}`);
+        return;
       }
 
       try {
@@ -138,7 +125,7 @@ export default function Cadastro() {
   }
 
   return (
-    <Cenario classe={`tela-formulario tela-cadastro ${origem === 'primeiro-acesso' ? 'tela-cadastro--primeiro' : ''}`}>
+    <Cenario classe={`tela-formulario tela-cadastro ${origem === 'novo' ? 'tela-cadastro--primeiro' : ''}`}>
       <div className="formulario-marca">
         <Marca compacta />
       </div>
@@ -181,9 +168,7 @@ export default function Cadastro() {
             />
           </div>
           <p className="ajuda-campo">
-            {origem === 'primeiro-acesso'
-              ? 'Confira seu RA. Você pode corrigir o número antes de continuar.'
-              : 'Peça seu RA à professora se você ainda não decorou!'}
+            Peça seu RA à professora se você ainda não decorou!
           </p>
         </div>
 

@@ -12,8 +12,8 @@ Todas as chamadas do jogo passam por `services/jogo.js` (token JWT do aluno, adi
 | Funcionalidade | Método e rota | Corpo | Resposta usada | Tela |
 |---|---|---|---|---|
 | Login do aluno | `POST /api/auth/aluno/login` | `{ ra, senha }` | `token`, `cadastroInicialPendente`, `usuario` | `/login` |
-| Primeiro acesso | `POST /api/auth/aluno/entrar-turma` | `{ ra, codigoPermanente, senha }` | `token`, `cadastroInicialPendente`, `usuario` | `/cadastro` |
-| Cadastro inicial | `PATCH /api/alunos/cadastro-inicial` | `{ nomeCompleto, codigoPermanente, sexo }` | `aluno` | `/cadastro` |
+| Primeiro acesso (sem senha, não devolve token) | `POST /api/auth/aluno/cadastro` | `{ ra, codigoPermanente, nomeCompleto, sexo }` | `mensagem` | `/cadastro` |
+| Cadastro pendente (aluno criado pela professora) | `PATCH /api/alunos/cadastro-inicial` | `{ nomeCompleto, codigoPermanente, sexo }` | `aluno` | `/cadastro` |
 | Perfil | `GET /api/alunos/me` | — | `aluno` (nome, RA, `avatarSelecionado`, `turma { id, nome, mascote }`) | cabeçalho, Configurações |
 | Trocar avatar | `PUT /api/alunos/me/avatar` | `{ avatarId }` | `avatarSelecionado` | `/avatar`, `/loja` |
 | Saldo | `GET /api/moedas/saldo` | — | `saldo` | cabeçalho |

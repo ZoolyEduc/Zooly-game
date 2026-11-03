@@ -2,9 +2,12 @@ const CHAVES = {
   token: 'zooly_token',
   usuario: 'zooly_usuario',
   cadastroPendente: 'zooly_cadastro_pendente',
-  introPendente: 'zooly_intro_pendente',
-  primeiroAcesso: 'zooly_primeiro_acesso'
+  introPendente: 'zooly_intro_pendente'
 };
+
+// Versões antigas guardavam o RA e a senha da turma nesta chave do sessionStorage.
+// Hoje o cadastro não usa senha; a chave só é apagada caso ainda exista na aba.
+const CHAVE_PRIMEIRO_ACESSO_LEGADO = 'zooly_primeiro_acesso';
 
 // Restos do antigo modo demonstração (removido). São apagados ao abrir o jogo:
 // nunca ativam dados fictícios.
@@ -135,25 +138,6 @@ export function limparSessao() {
   remover(ls, CHAVES.introPendente);
 }
 
-/* ---------- Primeiro acesso (somente nesta aba) ---------- */
-
-// A senha da turma fica apenas no sessionStorage desta aba e é apagada
-// assim que a entrada na turma é concluída.
-export function salvarPrimeiroAcesso(credenciais) {
-  if (!noNavegador()) return;
-  gravar(window.sessionStorage, CHAVES.primeiroAcesso, JSON.stringify(credenciais));
-}
-
-export function obterPrimeiroAcesso() {
-  if (!noNavegador()) return null;
-  return lerJson(CHAVES.primeiroAcesso, null, window.sessionStorage);
-}
-
-export function limparPrimeiroAcesso() {
-  if (!noNavegador()) return;
-  remover(window.sessionStorage, CHAVES.primeiroAcesso);
-}
-
 /* ---------- Estado consolidado ---------- */
 
 /**
@@ -164,6 +148,7 @@ export function obterEstadoSessao() {
   const vazio = { modo: null, cadastroPendente: false, introPendente: false, expirada: false };
   if (!noNavegador()) return vazio;
   limparResiduosDemoLegado();
+  remover(window.sessionStorage, CHAVE_PRIMEIRO_ACESSO_LEGADO);
 
   if (obterToken()) {
     return { ...vazio, modo: 'real', cadastroPendente: cadastroPendente(), introPendente: introPendente() };
@@ -179,5 +164,5 @@ export function obterEstadoSessao() {
 
 export function sairDeTudo() {
   limparSessao();
-  limparPrimeiroAcesso();
+  if (noNavegador()) remover(window.sessionStorage, CHAVE_PRIMEIRO_ACESSO_LEGADO);
 }

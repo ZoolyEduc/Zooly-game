@@ -7,9 +7,10 @@ export async function loginAluno({ ra, senha }) {
   return data;
 }
 
-export async function entrarNaTurma({ ra, codigoPermanente, senha }) {
-  const { data } = await api.post('/api/auth/aluno/entrar-turma', { ra, codigoPermanente, senha });
-  salvarSessao(data);
+// Primeiro acesso: cadastro sem senha. A API não devolve token; para entrar,
+// o aluno usa o login normal (RA + senha da turma).
+export async function cadastrarAluno({ ra, codigoPermanente, nomeCompleto, sexo }) {
+  const { data } = await api.post('/api/auth/aluno/cadastro', { ra, codigoPermanente, nomeCompleto, sexo });
   return data;
 }
 

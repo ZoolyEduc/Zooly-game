@@ -13,7 +13,7 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { MongoMemoryReplSet } from 'mongodb-memory-server';
-import { ALUNOS, SENHA_TURMA, TURMA } from '../dados.mjs';
+import { ALUNOS, SENHA_TURMA, TURMA, TURMA_SEM_SENHA } from '../dados.mjs';
 
 const RAIZ_JOGO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const DIR_API = path.resolve(process.env.ZOOLY_API_DIR || path.join(RAIZ_JOGO, '..', 'Zooly-api'));
@@ -91,6 +91,15 @@ const turma = await Turma.create({
   escola: escola._id,
   professorResponsavel: professora._id,
   senhaAcessoHash: await bcrypt.hash(SENHA_TURMA, 4)
+});
+await Turma.create({
+  nome: TURMA_SEM_SENHA.nome,
+  codigoPermanente: TURMA_SEM_SENHA.codigo,
+  periodo: TURMA_SEM_SENHA.periodo,
+  mascote: 'sarue',
+  anoEscolar: new Date().getFullYear(),
+  escola: escola._id,
+  professorResponsavel: professora._id
 });
 await Aluno.create([
   { ra: 'E2E-0001', nomeCompleto: 'Lia Teste', sexo: 'feminino', turma: turma._id, cadastroInicialConcluido: true },

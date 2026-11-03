@@ -4,7 +4,7 @@
  * Os cenários rodam em sequência e dependem do estado deixado pelo anterior.
  */
 import { expect, test } from '@playwright/test';
-import { SENHA_TURMA, TURMA, URL_API } from './dados.mjs';
+import { SENHA_TURMA, TURMA, TURMA_SEM_SENHA, URL_API } from './dados.mjs';
 import { apiGet, jogarTreino, login, saldoNoCabecalho, tokenDe, vigiarContexto } from './suporte.mjs';
 
 test.describe.configure({ mode: 'serial' });
@@ -206,24 +206,47 @@ test('Token recusado pela API (401) limpa a sessão e volta ao login', async () 
   expect(await tokenDe(p)).toBeNull();
 });
 
-test('Primeiro acesso com código errado mostra o erro da API', async () => {
+test('Primeiro acesso: o link do login abre o cadastro direto, sem senha', async () => {
   await p.goto('/login');
-  await p.fill('#raLogin', 'E2E-NOVO');
-  await p.fill('#senhaLogin', SENHA_TURMA);
   await p.getByRole('button', { name: 'Primeiro acesso? Cadastre-se' }).click();
-  await p.waitForURL(/\/cadastro/);
+  await p.waitForURL(/\/cadastro$/);
+  await expect(p.locator('input[type=password]')).toHaveCount(0);
+  await expect(p.locator('#cadRa')).not.toHaveAttribute('readonly', '');
   await p.getByRole('button', { name: /SALVAR/ }).click();
   await expect(p.getByText('Escreva o seu nome.')).toBeVisible();
   await p.fill('#cadNome', 'Rafa Novo');
+  await p.fill('#cadRa', 'E2E-NOVO');
   await p.locator('label.opcao-sexo.masculino').click();
   await p.fill('#cadCodigo', 'ERRADO');
   await p.getByRole('button', { name: /SALVAR/ }).click();
-  await expect(p.getByText('Código da turma ou senha inválidos.')).toBeVisible();
+  await expect(p.getByText('Código da turma não encontrado. Confira com sua professora.')).toBeVisible();
 });
 
-test('Primeiro acesso completo: entrar na turma, cadastro inicial e introdução', async () => {
+test('Primeiro acesso: turma sem senha definida bloqueia o cadastro', async () => {
+  await p.fill('#cadCodigo', TURMA_SEM_SENHA.codigo);
+  await p.getByRole('button', { name: /SALVAR/ }).click();
+  await expect(p.getByText('Peça à sua professora para liberar a turma.')).toBeVisible();
+  await expect(p).toHaveURL(/\/cadastro$/);
+});
+
+test('Primeiro acesso completo: cadastro, login com a senha da turma e introdução', async () => {
   await p.fill('#cadCodigo', TURMA.codigo);
   await p.getByRole('button', { name: /SALVAR/ }).click();
+  await p.waitForURL(/\/login\?cadastro=ok/);
+  await expect(p.getByText('Cadastro feito! Agora digite a senha da turma para entrar.')).toBeVisible();
+  await expect(p.locator('#raLogin')).toHaveValue('E2E-NOVO');
+  await expect(p.locator('#senhaLogin')).toHaveValue('');
+  // O cadastro não abre sessão nem guarda senha no navegador.
+  expect(await tokenDe(p)).toBeNull();
+  expect(await p.evaluate(() => JSON.stringify({ ...sessionStorage }))).not.toContain(SENHA_TURMA);
+
+  // Sem a senha da turma, não entra.
+  await p.fill('#senhaLogin', 'senha-errada');
+  await p.click('button[type=submit]');
+  await expect(p.getByText('RA ou senha não conferem')).toBeVisible();
+
+  await p.fill('#senhaLogin', SENHA_TURMA);
+  await p.click('button[type=submit]');
   await p.waitForURL(/\/introducao/);
   await concluirIntroducao(p);
   await p.waitForURL(/\/aventura/);
@@ -231,7 +254,20 @@ test('Primeiro acesso completo: entrar na turma, cadastro inicial e introdução
   const { aluno } = await apiGet(await tokenDe(p), '/api/alunos/me');
   expect(aluno.cadastroInicialConcluido).toBe(true);
   expect(aluno.nomeCompleto).toBe('Rafa Novo');
-  expect(await p.evaluate(() => sessionStorage.getItem('zooly_primeiro_acesso'))).toBeNull();
+  expect(aluno.sexo).toBe('masculino');
+});
+
+test('Primeiro acesso com RA já cadastrado orienta a fazer login', async () => {
+  await p.evaluate(() => localStorage.clear());
+  await p.goto('/cadastro');
+  await p.fill('#cadNome', 'Outra Pessoa');
+  await p.fill('#cadRa', 'E2E-NOVO');
+  await p.locator('label.opcao-sexo.feminino').click();
+  await p.fill('#cadCodigo', TURMA.codigo);
+  await p.getByRole('button', { name: /SALVAR/ }).click();
+  await expect(p.getByText('Este RA já tem cadastro. Entre com seu RA e a senha da turma.')).toBeVisible();
+  await p.getByRole('button', { name: 'Voltar para o login' }).click();
+  await p.waitForURL(/\/login$/);
 });
 
 test('Cadastro pendente: login redireciona ao cadastro com RA travado', async () => {

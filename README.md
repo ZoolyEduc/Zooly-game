@@ -50,7 +50,8 @@ Detalhes em [docs/INTEGRACAO-API.md](docs/INTEGRACAO-API.md#tentativas-das-miss�
    - cadastro pendente → `/cadastro`;
    - introdução pendente → `/introducao`;
    - senão → `/aventura`.
-3. **Primeiro acesso**: RA + senha da turma no login → "Primeiro acesso? Cadastre-se" → `/cadastro`. Ao salvar, chama `POST /api/auth/aluno/entrar-turma` e depois `PATCH /api/alunos/cadastro-inicial`. A senha fica só no `sessionStorage` da aba e é apagada após a entrada na turma. Se o segundo passo falhar, a nova tentativa envia apenas o cadastro.
+3. **Primeiro acesso** (sem senha): "Primeiro acesso? Cadastre-se" no login abre `/cadastro` direto. A criança informa nome, RA, sexo e código da turma, e o jogo chama `POST /api/auth/aluno/cadastro`. A API valida o código (a turma precisa existir, não estar arquivada e já ter senha de acesso definida pela professora) e não devolve token. Em seguida, o jogo volta ao login com o RA preenchido e a mensagem de sucesso; a criança entra com a senha da turma e vê a introdução. Nenhuma senha é guardada no navegador.
+   - **Cadastro pendente** (aluno criado pela professora): entra no login com RA e senha da turma, é levado a `/cadastro` com o RA travado e completa os dados com `PATCH /api/alunos/cadastro-inicial`.
 4. **Introdução guiada** (5 etapas) é exibida uma vez após o cadastro: boas-vindas, mascotes, proposta, como usar o mapa e como funcionam as missões. No fim, a criança escolhe fazer a **missão de treino** (`/atividade/1-4`) ou pular direto para as missões do professor. O guia e o treino podem ser revistos pelo cartão "Aprenda a jogar" da Home.
 
 ### Proteção de rotas

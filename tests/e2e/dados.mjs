@@ -6,6 +6,8 @@ export const URL_JOGO = `http://localhost:${PORTA_JOGO}`;
 
 export const SENHA_TURMA = 'senha-e2e';
 export const TURMA = { nome: '1º Ano E2E', codigo: 'E2E-1A', periodo: 'Manhã' };
+// Turma em que a professora ainda não definiu a senha de acesso.
+export const TURMA_SEM_SENHA = { nome: '2º Ano E2E', codigo: 'E2E-2A', periodo: 'Tarde' };
 
 // RA dos alunos usados por cada spec (cadastro completo, sem progresso no início).
 export const ALUNOS = { tentativas: 'E2E-0002', semDemo: 'E2E-0003' };

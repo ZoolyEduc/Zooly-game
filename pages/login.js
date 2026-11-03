@@ -6,7 +6,7 @@ import Marca from '../components/marca/Marca';
 import { ROTAS } from '../config/rotas';
 import { loginAluno } from '../services/auth';
 import { mensagemErroApi, statusDoErro } from '../services/erros';
-import { limparPrimeiroAcesso, limparSessao, obterEstadoSessao, salvarPrimeiroAcesso } from '../services/sessao';
+import { obterEstadoSessao } from '../services/sessao';
 import { destinoParaRota } from '../components/layout/GuardaSessao';
 
 export default function Login() {
@@ -16,6 +16,15 @@ export default function Login() {
   const [carregando, setCarregando] = useState(false);
   const router = useRouter();
   const sessaoExpirada = router.isReady && router.query.sessao === 'expirada';
+  // Volta do cadastro: /login?cadastro=ok&ra=... (o RA já vem preenchido).
+  const cadastroConcluido = router.isReady && router.query.cadastro === 'ok';
+  const raDoCadastro = router.isReady && typeof router.query.ra === 'string' ? router.query.ra : '';
+
+  /* eslint-disable react-hooks/set-state-in-effect */
+  useEffect(() => {
+    if (raDoCadastro) setRa(raDoCadastro);
+  }, [raDoCadastro]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
     if (!router.isReady || sessaoExpirada) return;
@@ -35,7 +44,6 @@ export default function Login() {
 
     setCarregando(true);
     try {
-      limparPrimeiroAcesso();
       const resposta = await loginAluno({ ra: raLimpo, senha });
       const destino = destinoParaRota(ROTAS.inicio, obterEstadoSessao());
       router.push(resposta.cadastroInicialPendente ? ROTAS.cadastro : destino || ROTAS.inicio);
@@ -48,18 +56,6 @@ export default function Login() {
     } finally {
       setCarregando(false);
     }
-  }
-
-  function iniciarCadastro() {
-    const raLimpo = ra.trim();
-    if (!raLimpo || !senha) {
-      setErro('Para começar, informe seu RA e a senha da turma. Depois você completa seus dados.');
-      return;
-    }
-
-    limparSessao();
-    salvarPrimeiroAcesso({ ra: raLimpo, senha });
-    router.push(ROTAS.cadastro);
   }
 
   return (
@@ -94,6 +90,11 @@ export default function Login() {
               disabled={carregando}
             />
           </div>
+          {cadastroConcluido && !erro && (
+            <p className="mensagem-aviso" role="status">
+              Cadastro feito! Agora digite a senha da turma para entrar.
+            </p>
+          )}
           {sessaoExpirada && !erro && (
             <p className="mensagem-aviso" role="status">
               Sua sessão terminou. Entre novamente para continuar a aventura.
@@ -105,7 +106,7 @@ export default function Login() {
         <button className="botao-principal botao-entrar" type="submit" disabled={carregando}>
           {carregando ? 'Entrando...' : 'Entrar'}
         </button>
-        <button type="button" className="link-secundario" onClick={iniciarCadastro} disabled={carregando}>
+        <button type="button" className="link-secundario" onClick={() => router.push(ROTAS.cadastro)} disabled={carregando}>
           Primeiro acesso? Cadastre-se
         </button>
       </form>
