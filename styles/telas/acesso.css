@@ -212,6 +212,11 @@
   font-size: 20px;
 }
 
+/* Espaço lateral para as aspas decorativas não encostarem no título. */
+.painel-introducao h1 {
+  padding: 0 22px;
+}
+
 .painel-introducao--amigos p {
   font-size: 13px;
 }
@@ -232,59 +237,70 @@
   right: 13px;
 }
 
-/* Mascotes espalhados pela trilha (Abertura-2). */
+/* Mascotes em grade de cartões (Abertura-2): 2x2 no celular estreito, 4 colunas com espaço. */
 .amigos-trilha {
-  position: relative;
   width: 100%;
-  height: 250px;
-  margin-top: 6px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .amigo {
-  position: absolute;
+  min-width: 0;
+  padding: 10px 8px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 8px;
+  border: 3px solid var(--branco);
+  border-radius: 24px;
+  background: rgba(255, 248, 233, 0.94);
+  box-shadow: 0 5px 0 rgba(224, 173, 85, 0.6);
 }
 
-.amigo img {
-  width: 92px;
-  height: 104px;
+/* Área de tamanho fixo: todos os animais ocupam o mesmo espaço, sem distorcer. */
+.amigo__foto {
+  --foto: 112px;
+  width: 100%;
+  height: var(--foto);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.amigo__foto img {
+  display: block;
+  width: 100%;
+  max-width: var(--foto);
+  height: var(--foto);
   object-fit: contain;
   filter: drop-shadow(0 4px 2px rgba(0, 0, 0, 0.2));
 }
 
-.amigo b {
-  min-width: 78px;
-  margin-top: -6px;
+.amigo__nome {
+  max-width: 100%;
   padding: 4px 12px;
   border: 2px solid #fff4d0;
   border-radius: 25px;
   background: #ffe3a0;
   box-shadow: 0 3px 0 #c98b2a;
   color: #553313;
-  font-size: 12px;
+  font-family: var(--fonte-titulo);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
   text-align: center;
+  overflow-wrap: anywhere;
 }
 
-.amigo--lagarto {
-  left: 4%;
-  top: 0;
-}
-
-.amigo--cobra {
-  left: 38%;
-  top: 8px;
-}
-
-.amigo--sarue {
-  left: 30%;
-  top: 122px;
-}
-
-.amigo--papagaio {
-  right: 2%;
-  top: 112px;
+/* Na etapa dos amigos a logo fica menor para caber a grade sem rolagem. */
+.tela-introducao--amigos .marca {
+  width: min(100%, 220px);
+  margin-bottom: 10px;
 }
 
 /* Etapas de guia: mapa e missões. */
@@ -700,8 +716,18 @@
     margin-bottom: 8px;
   }
 
+  .tela-introducao--amigos .marca {
+    width: 170px;
+    margin-bottom: 6px;
+  }
+
   .amigos-trilha {
-    height: 220px;
+    margin-top: 12px;
+    gap: 10px;
+  }
+
+  .amigo__foto {
+    --foto: 88px;
   }
 
   .painel-introducao {
@@ -726,8 +752,139 @@
   }
 }
 
+/* Celulares até 380px: título dos amigos cabe em uma linha entre as aspas. */
+@media (max-width: 380px) {
+  .painel-introducao h1 {
+    padding: 0 18px;
+  }
+
+  .painel-introducao--amigos h1 {
+    font-size: 18px;
+  }
+}
+
+/* Celulares de 320px: cartões e etiquetas mais compactos. */
+@media (max-width: 359px) {
+  .amigos-trilha {
+    gap: 10px;
+  }
+
+  .amigo {
+    padding: 8px 6px 10px;
+    border-radius: 20px;
+  }
+
+  .amigo__nome {
+    padding: 3px 10px;
+    font-size: 13px;
+  }
+}
+
+/* Celulares largos (a partir de 420px): os quatro amigos lado a lado. */
+@media (min-width: 420px) {
+  .amigos-trilha {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .amigo {
+    padding: 8px 4px 10px;
+    border-radius: 20px;
+  }
+
+  .amigo__foto {
+    --foto: 82px;
+  }
+
+  .amigo__nome {
+    padding: 3px 8px;
+    font-size: 12px;
+  }
+}
+
 @media (min-width: 600px) {
   .cenario {
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Tablets: a introdução usa mais largura, com cartões maiores. */
+  .tela-introducao {
+    width: min(100%, 680px);
+  }
+
+  .tela-introducao .cenario__conteudo {
+    padding: 28px 40px 36px;
+  }
+
+  .tela-introducao .painel-introducao,
+  .tela-introducao .guia-cartao,
+  .tela-introducao .acoes-introducao {
+    max-width: 560px;
+  }
+
+  .tela-introducao .amigos-trilha {
+    max-width: 600px;
+    gap: 14px;
+  }
+
+  .tela-introducao .amigo {
+    padding: 12px 8px 14px;
+    border-radius: 24px;
+  }
+
+  .tela-introducao .amigo__foto {
+    --foto: 140px;
+  }
+
+  .tela-introducao .painel-introducao--amigos h1 {
+    font-size: 24px;
+  }
+
+  .tela-introducao .painel-introducao--amigos p {
+    font-size: 16px;
+  }
+
+  .tela-introducao .amigo__nome {
+    padding: 4px 14px;
+    font-size: 15px;
+  }
+
+  .tela-introducao--amigos .marca {
+    width: 300px;
+  }
+}
+
+/* Telas muito baixas (ex.: 320x568): logo e fotos menores para os botões ficarem visíveis. */
+@media (max-height: 620px) {
+  .tela-introducao--amigos .marca {
+    width: 120px;
+    margin: 0 auto 4px;
+  }
+
+  .tela-introducao--amigos .painel-introducao--amigos {
+    padding: 10px 14px;
+  }
+
+  .tela-introducao--amigos .painel-introducao--amigos h1 {
+    margin-bottom: 4px;
+    font-size: 18px;
+  }
+
+  .tela-introducao--amigos .amigos-trilha {
+    margin-top: 10px;
+    gap: 8px;
+  }
+
+  .tela-introducao--amigos .amigo {
+    gap: 4px;
+    padding: 6px 6px 8px;
+  }
+
+  .tela-introducao--amigos .amigo__foto {
+    --foto: 64px;
+  }
+
+  .tela-introducao--amigos .acoes-introducao {
+    padding-top: 12px;
   }
 }

@@ -132,11 +132,27 @@
   pointer-events: none;
 }
 
+/* Camada escura em tela cheia: fixa na viewport, acima de cabeçalho e navegação (z 20). */
 .balao-mapa--escuro {
+  position: fixed;
+  z-index: 60;
   inset: 0;
+  padding: 20px 12px calc(20px + env(safe-area-inset-bottom));
   display: flex;
-  align-items: flex-end;
-  background: rgba(20, 20, 20, 0.45);
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: rgba(20, 20, 20, 0.55);
+  pointer-events: auto;
+}
+
+.balao-mapa--escuro .balao-mapa__conteudo {
+  width: min(100%, calc(var(--largura-app) - 24px));
+}
+
+.balao-mapa--escuro .balao-mapa__fala {
+  margin-bottom: 0;
 }
 
 .balao-mapa__conteudo {

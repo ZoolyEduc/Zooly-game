@@ -63,23 +63,19 @@ const ETAPAS = [
   }
 ];
 
-const POSICOES = {
-  lagarto: 'amigo--lagarto',
-  cobra: 'amigo--cobra',
-  sarue: 'amigo--sarue',
-  papagaio: 'amigo--papagaio'
-};
-
+// Grade de cartões: 2x2 em celulares estreitos e 4 colunas quando há espaço.
 function ConteudoMascotes() {
   return (
-    <div className="amigos-trilha">
+    <ul className="amigos-trilha" aria-label="Seus novos amigos">
       {LISTA_MASCOTES.map((mascote) => (
-        <div key={mascote.id} className={`amigo ${POSICOES[mascote.id]}`}>
-          <Image src={mascote.imagem} alt={mascote.nome} width={96} height={120} />
-          <b>{mascote.nome}</b>
-        </div>
+        <li key={mascote.id} className="amigo">
+          <span className="amigo__foto">
+            <Image src={mascote.imagem} alt={mascote.nome} width={120} height={120} sizes="120px" />
+          </span>
+          <b className="amigo__nome">{mascote.nome}</b>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
@@ -158,7 +154,7 @@ export default function Introducao() {
   }
 
   return (
-    <Cenario classe="tela-introducao">
+    <Cenario classe={`tela-introducao ${atual.conteudo === 'mascotes' ? 'tela-introducao--amigos' : ''}`}>
       <div className="introducao__topo">
         <div className="progresso-etapas" aria-label={`Etapa ${etapa + 1} de ${ETAPAS.length}`}>
           {ETAPAS.map((item, indice) => (
