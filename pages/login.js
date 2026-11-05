@@ -37,6 +37,7 @@ export default function Login() {
     setErro('');
 
     const raLimpo = ra.trim();
+    // Alunos antigos podem ter RA em outro formato: o login aceita qualquer RA preenchido.
     if (!raLimpo || !senha) {
       setErro('Informe seu RA e sua senha para entrar.');
       return;
@@ -68,6 +69,7 @@ export default function Login() {
             <FiCreditCard aria-hidden="true" />
             <input
               id="raLogin"
+              type="text"
               value={ra}
               onChange={(evento) => setRa(evento.target.value)}
               placeholder="Digite seu RA"

@@ -15,6 +15,8 @@ Todas as chamadas do jogo passam por `services/jogo.js` (token JWT do aluno, adi
 | Primeiro acesso (sem senha, não devolve token) | `POST /api/auth/aluno/cadastro` | `{ ra, codigoPermanente, nomeCompleto, sexo }` | `mensagem` | `/cadastro` |
 | Cadastro pendente (aluno criado pela professora) | `PATCH /api/alunos/cadastro-inicial` | `{ nomeCompleto, codigoPermanente, sexo }` | `aluno` | `/cadastro` |
 | Perfil | `GET /api/alunos/me` | — | `aluno` (nome, RA, `avatarSelecionado`, `turma { id, nome, mascote }`) | cabeçalho, Configurações |
+
+O RA é enviado sempre como texto, preservando zeros à esquerda. Novos cadastros (primeiro acesso, ou entrada na turma que cria o aluno) exigem exatamente 13 dígitos. Alunos já cadastrados com RA em outro formato continuam podendo fazer login, entrar na turma e concluir o cadastro pendente; o RA deles nunca é alterado automaticamente.
 | Trocar avatar | `PUT /api/alunos/me/avatar` | `{ avatarId }` | `avatarSelecionado` | `/avatar`, `/loja` |
 | Saldo | `GET /api/moedas/saldo` | — | `saldo` | cabeçalho |
 | Extrato | `GET /api/moedas/movimentacoes?pagina=1&limite=5` | — | `movimentacoes` | `/loja` |

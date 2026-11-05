@@ -31,12 +31,12 @@ test('Proteção de rotas: /aventura sem sessão vai para /login', async () => {
 });
 
 test('Login real com senha errada mostra mensagem amigável (401 da API)', async () => {
-  await login(p, 'E2E-0001', 'errada');
+  await login(p, '0000000000001', 'errada');
   await expect(p.getByText('RA ou senha não conferem')).toBeVisible();
 });
 
 test('Login real válido leva à Home com saudação, saldo e missões da API', async () => {
-  await login(p, 'E2E-0001');
+  await login(p, '0000000000001');
   await p.waitForURL(/\/aventura/);
   await expect(p.getByRole('heading', { name: 'Olá, Lia!' })).toBeVisible();
   await expect(p.getByText('Sua próxima aventura é "Aventura no rio"')).toBeVisible();
@@ -156,7 +156,7 @@ test('Configurações: dados reais do aluno e da turma', async () => {
   await p.goto('/configuracoes');
   await expect(p.locator('.perfil').getByText('Lia Teste')).toBeVisible();
   await expect(p.getByText(`${TURMA.nome} • ${TURMA.periodo}`)).toBeVisible();
-  await expect(p.getByText('RA E2E-0001')).toBeVisible();
+  await expect(p.getByText('RA 0000000000001')).toBeVisible();
 });
 
 test('Painel dos responsáveis (modo real) mostra só dados da API', async () => {
@@ -215,7 +215,7 @@ test('Primeiro acesso: o link do login abre o cadastro direto, sem senha', async
   await p.getByRole('button', { name: /SALVAR/ }).click();
   await expect(p.getByText('Escreva o seu nome.')).toBeVisible();
   await p.fill('#cadNome', 'Rafa Novo');
-  await p.fill('#cadRa', 'E2E-NOVO');
+  await p.fill('#cadRa', '0000000000005');
   await p.locator('label.opcao-sexo.masculino').click();
   await p.fill('#cadCodigo', 'ERRADO');
   await p.getByRole('button', { name: /SALVAR/ }).click();
@@ -234,7 +234,7 @@ test('Primeiro acesso completo: cadastro, login com a senha da turma e introduç
   await p.getByRole('button', { name: /SALVAR/ }).click();
   await p.waitForURL(/\/login\?cadastro=ok/);
   await expect(p.getByText('Cadastro feito! Agora digite a senha da turma para entrar.')).toBeVisible();
-  await expect(p.locator('#raLogin')).toHaveValue('E2E-NOVO');
+  await expect(p.locator('#raLogin')).toHaveValue('0000000000005');
   await expect(p.locator('#senhaLogin')).toHaveValue('');
   // O cadastro não abre sessão nem guarda senha no navegador.
   expect(await tokenDe(p)).toBeNull();
@@ -261,7 +261,7 @@ test('Primeiro acesso com RA já cadastrado orienta a fazer login', async () => 
   await p.evaluate(() => localStorage.clear());
   await p.goto('/cadastro');
   await p.fill('#cadNome', 'Outra Pessoa');
-  await p.fill('#cadRa', 'E2E-NOVO');
+  await p.fill('#cadRa', '0000000000005');
   await p.locator('label.opcao-sexo.feminino').click();
   await p.fill('#cadCodigo', TURMA.codigo);
   await p.getByRole('button', { name: /SALVAR/ }).click();
@@ -272,9 +272,9 @@ test('Primeiro acesso com RA já cadastrado orienta a fazer login', async () => 
 
 test('Cadastro pendente: login redireciona ao cadastro com RA travado', async () => {
   await p.evaluate(() => localStorage.clear());
-  await login(p, 'E2E-PEND');
+  await login(p, '0000000000004');
   await p.waitForURL(/\/cadastro/);
-  await expect(p.locator('#cadRa')).toHaveValue('E2E-PEND');
+  await expect(p.locator('#cadRa')).toHaveValue('0000000000004');
   await expect(p.locator('#cadRa')).toHaveAttribute('readonly', '');
   await p.goto('/mapa');
   await p.waitForURL(/\/cadastro/);
