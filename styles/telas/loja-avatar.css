@@ -96,6 +96,11 @@
 }
 
 .loja-link-avatar a {
+  /* Área de toque mínima de 44px para o link "Trocar meu avatar". */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 6px;
   color: var(--verde-texto);
   font-weight: 900;
 }
@@ -238,6 +243,14 @@
 .botao-confirmar-escolha:disabled {
   background: var(--verde-desabilitado);
   box-shadow: none;
+}
+
+/* Tablets: três avatares por linha, aproveitando a largura. */
+@media (min-width: 600px) {
+  .grade-avatares {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
 }
 
 @media (max-width: 370px) {

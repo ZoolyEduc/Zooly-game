@@ -100,7 +100,9 @@
 .link-pular,
 .link-secundario {
   margin-top: 18px;
-  padding: 6px 4px;
+  /* Área de toque mínima de 44px (antes 34px), sem mudar o visual do link. */
+  min-height: 44px;
+  padding: 6px 8px;
   border: 0;
   background: transparent;
   color: var(--branco);
@@ -807,13 +809,23 @@
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
   }
 
-  /* Tablets: a introdução usa mais largura, com cartões maiores. */
-  .tela-introducao {
-    width: min(100%, 680px);
+  /* Tablets: o cenário de floresta ocupa a largura do app; o conteúdo fica numa
+     coluna central. Login e cadastro mantêm cartões com largura confortável. */
+  .tela-introducao .cenario__conteudo {
+    max-width: var(--coluna-tablet);
+    padding: 28px 40px 36px;
   }
 
-  .tela-introducao .cenario__conteudo {
-    padding: 28px 40px 36px;
+  .login-conteudo {
+    max-width: 500px;
+  }
+
+  .login-conteudo .marca {
+    width: min(100%, 400px);
+  }
+
+  .tela-cadastro .cenario__conteudo {
+    max-width: 560px;
   }
 
   .tela-introducao .painel-introducao,
