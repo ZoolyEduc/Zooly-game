@@ -9,24 +9,35 @@
   margin-top: -28px;
 }
 
-/* A cena mantém a proporção da arte (450x675): as cidades são posicionadas em % e
-   não podem desalinhar. Ela ocupa a largura toda ou, se faltar altura, o maior tamanho
-   que cabe entre o cabeçalho e a navegação (no tablet o mapa cresce pela altura). */
+/* A cena tem exatamente a proporção da arte (900x1350 = 2:3). As cidades são
+   posicionadas em % da cena (config/mapa.js), então a proporção não pode diferir da
+   imagem: com outra proporção a arte ganha faixas e os pontos desalinham.
+   Ela ocupa a largura toda ou, se faltar altura, o maior tamanho que cabe entre o
+   cabeçalho e a navegação (no tablet e no computador o mapa cresce pela altura). */
 .mapa-cena {
-  --mapa-desconto: calc(48px + var(--altura-nav) + 16px + env(safe-area-inset-bottom));
-  /* Largura do mapa em unidades da viewport (usada também pelo balão, que é fixo). */
-  --mapa-largura: min(100vw, max(300px, calc((100svh - var(--mapa-desconto)) * 450 / 675)));
+  --mapa-desconto: calc(
+    48px + var(--altura-nav) + 16px + env(safe-area-inset-bottom)
+  );
+
+  --mapa-largura: min(
+    100vw,
+    max(300px, calc((100svh - var(--mapa-desconto)) * 900 / 1350))
+  );
+
   position: relative;
   z-index: 0;
   width: min(100%, var(--mapa-largura));
   margin: 0 auto;
-  aspect-ratio: 450 / 675;
+  aspect-ratio: 900 / 1350;
   overflow: hidden;
   background: #65c6dc;
 }
 
 .mapa-cena__arte {
-  object-fit: cover;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .mapa-erro {
@@ -101,7 +112,9 @@
   transform: translate(-30%, -88%);
   pointer-events: none;
   filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.3));
-  transition: left 0.6s ease, top 0.6s ease;
+  transition:
+    left 0.6s ease,
+    top 0.6s ease;
 }
 
 .mapa-mascote img {
@@ -186,6 +199,17 @@
   flex: 0 0 auto;
   object-fit: contain;
   filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.3));
+}
+
+/* No balão sobre o mapa, o papagaio do balão fica oculto (o mapa já mostra o mascote
+   na cidade atual). Assim a fala usa a largura toda, fica mais baixa e não cobre as
+   cidades da base do mapa. A camada escura (sem mapa visível) mantém o papagaio. */
+.balao-mapa:not(.balao-mapa--escuro) .balao-mapa__mascote {
+  display: none;
+}
+
+.balao-mapa:not(.balao-mapa--escuro) .balao-mapa__fala {
+  margin-bottom: 6px;
 }
 
 .balao-mapa__fala {
@@ -310,11 +334,13 @@
 
   /* O cabeçalho do tablet é mais alto (84px): o mapa começa em 56px. */
   .mapa-cena {
-    --mapa-desconto: calc(56px + var(--altura-nav) + 16px + env(safe-area-inset-bottom));
+    --mapa-desconto: calc(
+      56px + var(--altura-nav) + 16px + env(safe-area-inset-bottom)
+    );
   }
 
-  /* Balão na metade direita da base do mapa (mar e barco). As placas de Cananéia
-     (até 48% da largura) e de Iguape (acima de 70% da altura) continuam visíveis.
+  /* Balão na metade direita da base do mapa (mar e barco). A placa de Cananéia
+     (até 47% da largura) e o marcador de Iguape (em 74% da altura) continuam visíveis.
      O papagaio do balão fica oculto: o mapa já mostra o mascote. */
   .balao-mapa:not(.balao-mapa--escuro) {
     left: auto;
@@ -324,15 +350,21 @@
     padding: 0 10px 8px;
   }
 
-  .balao-mapa:not(.balao-mapa--escuro) .balao-mapa__mascote {
-    display: none;
-  }
-
   .balao-mapa__fala b {
     font-size: 21px;
   }
 
   .balao-mapa__fala p {
     font-size: 16px;
+  }
+}
+
+/* Computadores (tela larga): o mapa em retrato é limitado pela altura e sobra espaço
+   dos lados. O balão vai para o canto inferior direito da moldura do app, com largura
+   confortável, encostando só na borda direita do mapa (mar e areia). */
+@media (min-width: 1000px) {
+  .balao-mapa:not(.balao-mapa--escuro) {
+    right: calc((100vw - var(--largura-app)) / 2 + 20px);
+    width: 310px;
   }
 }
