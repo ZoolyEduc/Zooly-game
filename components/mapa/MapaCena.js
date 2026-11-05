@@ -12,7 +12,10 @@ function rotuloCidade(cidade, situacao) {
 }
 
 export default function MapaCena({ cidades, cidadeFoco, onCidade, children }) {
-  const posicaoMascote = cidadeFoco ? cidadeFoco.ponto : POSICAO_INICIAL_MASCOTE;
+  // O papagaio pousa ao lado do marcador da cidade atual, sem cobrir a placa com o nome.
+  const posicaoMascote = cidadeFoco
+    ? cidadeFoco.mascote || cidadeFoco.ponto
+    : POSICAO_INICIAL_MASCOTE;
 
   return (
     <div className="mapa-cena">
