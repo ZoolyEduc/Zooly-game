@@ -27,7 +27,8 @@
 }
 
 .tela-atividade__sair {
-  min-height: 36px;
+  /* Alvo de toque mínimo de 44px (antes 36px). */
+  min-height: 44px;
   padding: 4px 12px;
   border: 2px solid #e2c766;
   border-radius: 18px;
@@ -354,6 +355,46 @@
 .botao-atividade:disabled {
   background: var(--verde-desabilitado);
   box-shadow: none;
+}
+
+/* Tablets: a atividade usa a coluna central (até 680px) e textos um pouco maiores. */
+@media (min-width: 600px) {
+  .atividade-progresso {
+    padding: 0 var(--respiro-x);
+  }
+
+  .tela-atividade__conteudo {
+    padding: 0 max(4px, calc(var(--respiro-x) - 20px));
+  }
+
+  .tela-atividade__rodape {
+    padding-left: var(--respiro-x);
+    padding-right: var(--respiro-x);
+  }
+
+  .atividade-titulo {
+    font-size: 40px;
+  }
+
+  /* História maior: a ilustração e o texto aproveitam a altura do tablet. */
+  .historia-arte {
+    width: min(80%, 480px);
+    height: clamp(220px, 28vh, 320px);
+    margin: 20px auto;
+  }
+
+  .historia-cartao {
+    padding: 24px 28px 28px;
+  }
+
+  .historia-cartao p {
+    font-size: 21px;
+  }
+
+  .recompensa-missao {
+    margin-top: 20px;
+    font-size: 17px;
+  }
 }
 
 @media (max-width: 370px) {

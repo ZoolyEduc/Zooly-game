@@ -9,10 +9,17 @@
   margin-top: -28px;
 }
 
+/* A cena mantém a proporção da arte (450x675): as cidades são posicionadas em % e
+   não podem desalinhar. Ela ocupa a largura toda ou, se faltar altura, o maior tamanho
+   que cabe entre o cabeçalho e a navegação (no tablet o mapa cresce pela altura). */
 .mapa-cena {
+  --mapa-desconto: calc(48px + var(--altura-nav) + 16px + env(safe-area-inset-bottom));
+  /* Largura do mapa em unidades da viewport (usada também pelo balão, que é fixo). */
+  --mapa-largura: min(100vw, max(300px, calc((100svh - var(--mapa-desconto)) * 450 / 675)));
   position: relative;
   z-index: 0;
-  width: 100%;
+  width: min(100%, var(--mapa-largura));
+  margin: 0 auto;
   aspect-ratio: 450 / 675;
   overflow: hidden;
   background: #65c6dc;
@@ -33,6 +40,8 @@
   z-index: 2;
   width: 27%;
   height: 7%;
+  /* Área de toque confortável mesmo no mapa de celulares estreitos. */
+  min-height: 44px;
   transform: translate(-50%, -50%);
   border: 0;
   border-radius: 18px;
@@ -123,12 +132,16 @@
   font-weight: 900;
 }
 
-/* Balões de fala. */
+/* Balões de fala: presos logo acima da navegação. No celular ocupam a faixa livre
+   abaixo do mapa (antes cobriam a parte de baixo da arte); no tablet ficam centralizados. */
 .balao-mapa {
-  position: absolute;
+  position: fixed;
   z-index: 5;
-  inset: auto 0 0;
-  padding: 0 12px 22px;
+  left: 50%;
+  bottom: calc(var(--altura-nav) + env(safe-area-inset-bottom) + 4px);
+  width: min(100%, var(--largura-app), 540px);
+  transform: translateX(-50%);
+  padding: 0 12px;
   pointer-events: none;
 }
 
@@ -137,6 +150,8 @@
   position: fixed;
   z-index: 60;
   inset: 0;
+  width: auto;
+  transform: none;
   padding: 20px 12px calc(20px + env(safe-area-inset-bottom));
   display: flex;
   align-items: center;
@@ -148,7 +163,7 @@
 }
 
 .balao-mapa--escuro .balao-mapa__conteudo {
-  width: min(100%, calc(var(--largura-app) - 24px));
+  width: min(100%, calc(var(--largura-app) - 24px), 540px);
 }
 
 .balao-mapa--escuro .balao-mapa__fala {
@@ -268,4 +283,56 @@
 
 .modal-fase .botao-pilula {
   width: 100%;
+}
+
+/* Tablets: mapa maior pede selos, etiquetas e balão proporcionais. */
+@media (min-width: 600px) {
+  .mapa-cidade__selo {
+    top: -12px;
+    right: -8px;
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
+    border-width: 3px;
+  }
+
+  .mapa-cidade__pulso {
+    border-width: 4px;
+    border-radius: 26px;
+  }
+
+  .mapa-trecho {
+    top: 52px;
+    right: 18px;
+    padding: 7px 16px;
+    font-size: 15px;
+  }
+
+  /* O cabeçalho do tablet é mais alto (84px): o mapa começa em 56px. */
+  .mapa-cena {
+    --mapa-desconto: calc(56px + var(--altura-nav) + 16px + env(safe-area-inset-bottom));
+  }
+
+  /* Balão na metade direita da base do mapa (mar e barco). As placas de Cananéia
+     (até 48% da largura) e de Iguape (acima de 70% da altura) continuam visíveis.
+     O papagaio do balão fica oculto: o mapa já mostra o mascote. */
+  .balao-mapa:not(.balao-mapa--escuro) {
+    left: auto;
+    right: max(0px, calc((100vw - var(--mapa-largura)) / 2));
+    width: calc(var(--mapa-largura) * 0.52);
+    transform: none;
+    padding: 0 10px 8px;
+  }
+
+  .balao-mapa:not(.balao-mapa--escuro) .balao-mapa__mascote {
+    display: none;
+  }
+
+  .balao-mapa__fala b {
+    font-size: 21px;
+  }
+
+  .balao-mapa__fala p {
+    font-size: 16px;
+  }
 }

@@ -37,8 +37,28 @@
   --raio-botao: 40px;
   --largura-app: 430px;
   --altura-nav: 88px;
+  /* Recuo lateral do conteúdo (no tablet forma uma coluna de leitura centralizada). */
+  --respiro-x: 20px;
+  --coluna-tablet: 680px;
 
   /* Tipografia */
   --fonte-texto: "Nunito", "Trebuchet MS", sans-serif;
   --fonte-titulo: "Fredoka", "Nunito", "Trebuchet MS", sans-serif;
+}
+
+/* Celulares estreitos (ex.: 360px): recuo lateral menor. */
+@media (max-width: 370px) {
+  :root {
+    --respiro-x: 14px;
+  }
+}
+
+/* Tablets: o app passa a usar a largura da tela (até 900px). Textos, listas e
+   formulários ficam numa coluna centralizada de até 680px, para não esticar demais. */
+@media (min-width: 600px) {
+  :root {
+    --largura-app: min(100vw, 900px);
+    --respiro-x: max(24px, calc((min(100vw, 900px) - var(--coluna-tablet)) / 2));
+    --altura-nav: 96px;
+  }
 }

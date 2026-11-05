@@ -14,7 +14,7 @@
 }
 
 .game-content {
-  padding: 26px 20px 24px;
+  padding: 26px var(--respiro-x) 24px;
 }
 
 /* ---------- Cabeçalho ---------- */
@@ -108,7 +108,7 @@
 /* ---------- Faixa de título ---------- */
 .page-title {
   position: relative;
-  margin: -26px -20px 22px;
+  margin: -26px calc(-1 * var(--respiro-x)) 22px;
   padding: 18px 64px;
   display: flex;
   align-items: center;
@@ -139,16 +139,7 @@
 }
 
 @media (max-width: 370px) {
-  .game-content {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
-  .page-title {
-    margin-left: -14px;
-    margin-right: -14px;
-  }
-
+  /* O recuo lateral menor (14px) vem de --respiro-x, em tokens.css. */
   .game-header__nome {
     font-size: 16px;
   }
@@ -162,5 +153,52 @@
 @media (min-width: 600px) {
   .game-frame {
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Cabeçalho e navegação alinhados à coluna de conteúdo, com elementos maiores. */
+  .game-header {
+    min-height: 84px;
+    padding: 12px var(--respiro-x);
+    gap: 16px;
+  }
+
+  .game-header__avatar {
+    width: 56px;
+    height: 56px;
+    flex-basis: 56px;
+  }
+
+  .game-header__avatar img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .game-header__nome {
+    max-width: 360px;
+    font-size: 22px;
+  }
+
+  .bottom-nav {
+    padding-left: max(12px, calc((min(100vw, 900px) - 600px) / 2));
+    padding-right: max(12px, calc((min(100vw, 900px) - 600px) / 2));
+  }
+
+  .bottom-nav a {
+    min-width: 96px;
+    min-height: 62px;
+    font-size: 15px;
+  }
+
+  .bottom-nav svg {
+    font-size: 28px;
+  }
+
+  .page-title {
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+
+  .page-title h1 {
+    font-size: 20px;
   }
 }
