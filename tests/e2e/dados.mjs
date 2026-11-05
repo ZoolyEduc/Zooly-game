@@ -10,4 +10,4 @@ export const TURMA = { nome: '1º Ano E2E', codigo: 'E2E-1A', periodo: 'Manhã' 
 export const TURMA_SEM_SENHA = { nome: '2º Ano E2E', codigo: 'E2E-2A', periodo: 'Tarde' };
 
 // RA dos alunos usados por cada spec (cadastro completo, sem progresso no início).
-export const ALUNOS = { tentativas: 'E2E-0002', semDemo: 'E2E-0003' };
+export const ALUNOS = { tentativas: '0000000000002', semDemo: '0000000000003' };

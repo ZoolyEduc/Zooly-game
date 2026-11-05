@@ -102,8 +102,8 @@ await Turma.create({
   professorResponsavel: professora._id
 });
 await Aluno.create([
-  { ra: 'E2E-0001', nomeCompleto: 'Lia Teste', sexo: 'feminino', turma: turma._id, cadastroInicialConcluido: true },
-  { ra: 'E2E-PEND', turma: turma._id },
+  { ra: '0000000000001', nomeCompleto: 'Lia Teste', sexo: 'feminino', turma: turma._id, cadastroInicialConcluido: true },
+  { ra: '0000000000004', turma: turma._id },
   // Alunos próprios de cada spec, para os cenários não dependerem uns dos outros.
   { ra: ALUNOS.tentativas, nomeCompleto: 'Theo Teste', sexo: 'masculino', turma: turma._id, cadastroInicialConcluido: true },
   { ra: ALUNOS.semDemo, nomeCompleto: 'Bia Teste', sexo: 'feminino', turma: turma._id, cadastroInicialConcluido: true }

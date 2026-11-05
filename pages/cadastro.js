@@ -18,9 +18,12 @@ import { cadastrarAluno, concluirCadastroInicial } from '../services/auth';
 import { mensagemErroApi, statusDoErro } from '../services/erros';
 
 // Devolve a primeira pendência do formulário, para a criança corrigir um campo por vez.
-function validarCadastro({ nome, ra, sexo, codigo }) {
+// RA novo precisa de 13 números. No cadastro pendente o RA já existe (pode ser antigo,
+// em outro formato) e vem preenchido: só é conferido que não está vazio.
+function validarCadastro({ nome, ra, sexo, codigo, raExistente }) {
   if (!nome.trim()) return 'Escreva o seu nome.';
-  if (!ra.trim()) return 'Escreva o seu RA.';
+  if (raExistente && !ra.trim()) return 'Escreva o seu RA.';
+  if (!raExistente && !/^\d{13}$/.test(ra.trim())) return 'O RA deve conter exatamente 13 números.';
   if (!sexo) return 'Escolha uma opção em "Sexo".';
   if (!codigo.trim()) return 'Digite o código da sua turma.';
   return '';
@@ -81,7 +84,13 @@ export default function Cadastro() {
     evento.preventDefault();
     setErro('');
 
-    const pendencia = validarCadastro({ nome, ra, sexo, codigo });
+    const pendencia = validarCadastro({
+      nome,
+      ra,
+      sexo,
+      codigo,
+      raExistente: origem === 'cadastro-pendente'
+    });
     if (pendencia) {
       setErro(pendencia);
       return;
@@ -158,11 +167,14 @@ export default function Cadastro() {
             <FiCreditCard aria-hidden="true" />
             <input
               id="cadRa"
+              type="text"
               value={ra}
               onChange={(evento) => setRa(evento.target.value)}
               readOnly={origem === 'cadastro-pendente'}
               placeholder="Digite seu RA"
               inputMode="numeric"
+              {...(origem === 'cadastro-pendente' ? {} : { maxLength: 13, pattern: '[0-9]{13}' })}
+              required
               autoComplete="username"
               disabled={carregando}
             />
