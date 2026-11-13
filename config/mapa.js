@@ -1,4 +1,5 @@
-// Posições em % da arte do mapa (public/images/mapas/mapa-vale-do-ribeira.png, 900x1350).
+// Posições em % da arte do mapa (public/images/mapas/mapa-mobile.png 493x740 no celular e
+// mapa-tablet.png 900x1351 no tablet: mesma composição, então as mesmas posições servem).
 // - rotulo: centro da placa com o nome da cidade (área clicável);
 // - ponto: centro do marcador redondo no caminho da cidade;
 // - mascote: onde o papagaio pousa quando a cidade é a atual (pés do papagaio). Fica

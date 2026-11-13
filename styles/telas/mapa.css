@@ -9,7 +9,8 @@
   margin-top: -28px;
 }
 
-/* A cena tem exatamente a proporção da arte (900x1350 = 2:3). As cidades são
+/* A cena tem exatamente a proporção da arte (mapa-mobile 493x740 e mapa-tablet
+   900x1351, ambas 2:3). As cidades são
    posicionadas em % da cena (config/mapa.js), então a proporção não pode diferir da
    imagem: com outra proporção a arte ganha faixas e os pontos desalinham.
    Ela ocupa a largura toda ou, se faltar altura, o maior tamanho que cabe entre o
@@ -21,14 +22,14 @@
 
   --mapa-largura: min(
     100vw,
-    max(300px, calc((100svh - var(--mapa-desconto)) * 900 / 1350))
+    max(300px, calc((100svh - var(--mapa-desconto)) * 900 / 1351))
   );
 
   position: relative;
   z-index: 0;
   width: min(100%, var(--mapa-largura));
   margin: 0 auto;
-  aspect-ratio: 900 / 1350;
+  aspect-ratio: 900 / 1351;
   overflow: hidden;
   background: #3EA5C0;
 }
