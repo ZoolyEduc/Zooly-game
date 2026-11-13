@@ -120,3 +120,42 @@
   font-weight: 900;
   box-shadow: 0 5px 0 #7a0606;
 }
+
+/* Tablets: perfil e cartões um pouco maiores, acompanhando a coluna central. */
+@media (min-width: 600px) {
+  .perfil__avatar {
+    width: 150px;
+    height: 150px;
+  }
+
+  .perfil > b {
+    font-size: 22px;
+  }
+
+  .perfil > span {
+    font-size: 17px;
+  }
+
+  .cartao-config {
+    min-height: 112px;
+    padding: 16px 24px;
+  }
+
+  .cartao-config__icone {
+    width: 58px;
+    height: 58px;
+    flex-basis: 58px;
+  }
+
+  .cartao-config__texto b {
+    font-size: 19px;
+  }
+
+  .cartao-config__texto small {
+    font-size: 16px;
+  }
+
+  .botao-sair {
+    font-size: 18px;
+  }
+}

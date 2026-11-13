@@ -14,6 +14,9 @@ export const IMAGENS = {
   },
   mapas: {
     valeDoRibeira: "/images/mapas/mapa-vale-do-ribeira.png",
+    // Mesma arte em dois tamanhos (proporção 2:3): celular (493x740) e tablet (900x1351).
+    valeDoRibeiraMobile: "/images/mapas/mapa-mobile.png",
+    valeDoRibeiraTablet: "/images/mapas/mapa-tablet.png",
   },
   moedas: {
     banana: "/images/moedas/moeda-banana.png",

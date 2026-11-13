@@ -458,7 +458,8 @@
   padding: 0;
   display: flex;
   align-items: center;
-  gap: 7px;
+  flex-wrap: wrap;
+  gap: 2px 7px;
   color: #554536;
   font-size: 13px;
   font-weight: 900;
@@ -479,7 +480,7 @@
 .campo-grupo small {
   margin-left: auto;
   color: #c52d2d;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -533,7 +534,7 @@
 .ajuda-campo {
   margin: 5px 4px 0;
   color: #857a6f;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .opcoes-sexo {
@@ -754,8 +755,13 @@
   }
 }
 
-/* Celulares até 380px: título dos amigos cabe em uma linha entre as aspas. */
+/* Celulares até 380px: título dos amigos cabe em uma linha entre as aspas e os
+   textos de exemplo dos campos do cadastro não são cortados. */
 @media (max-width: 380px) {
+  .campo input::placeholder {
+    font-size: 13px;
+  }
+
   .painel-introducao h1 {
     padding: 0 18px;
   }
@@ -826,6 +832,33 @@
 
   .tela-cadastro .cenario__conteudo {
     max-width: 560px;
+  }
+
+  .tela-cadastro .campo-grupo {
+    margin-bottom: 16px;
+  }
+
+  .tela-cadastro .campo-grupo > label,
+  .tela-cadastro .campo-grupo > legend {
+    font-size: 15px;
+  }
+
+  .tela-cadastro .campo-grupo small,
+  .tela-cadastro .ajuda-campo {
+    font-size: 13px;
+  }
+
+  .tela-cadastro .campo {
+    min-height: 58px;
+  }
+
+  .tela-cadastro .campo input {
+    font-size: 17px;
+  }
+
+  .tela-cadastro .opcao-sexo {
+    min-height: 58px;
+    font-size: 15px;
   }
 
   .tela-introducao .painel-introducao,

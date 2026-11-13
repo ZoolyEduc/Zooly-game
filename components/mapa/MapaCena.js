@@ -1,10 +1,29 @@
-import Image from 'next/image';
+import Image, { getImageProps } from 'next/image';
 import { FiCheck, FiLock } from 'react-icons/fi';
 import { IMAGENS } from '../../config/imagens';
 import { POSICAO_INICIAL_MASCOTE } from '../../config/mapa';
 import { TEXTO_SITUACAO, situacaoMissao } from '../../utils/missoes';
 
 const posicao = ({ x, y }) => ({ left: `${x}%`, top: `${y}%` });
+
+// Arte do mapa por dispositivo: celular (< 600px) usa a versão mobile e tablet usa a
+// versão maior. As duas têm a mesma composição e proporção, então as posições de
+// config/mapa.js valem para ambas.
+const ARTE_MAPA = {
+  alt: 'Mapa ilustrado do Vale do Ribeira com as cidades Eldorado, Sete Barras, Iporanga, Registro, Iguape e Cananéia',
+  fill: true,
+  loading: 'eager',
+};
+const { props: { srcSet: srcSetTablet } } = getImageProps({
+  ...ARTE_MAPA,
+  src: IMAGENS.mapas.valeDoRibeiraTablet,
+  sizes: '(max-width: 900px) 100vw, 900px',
+});
+const { props: propsMapaMobile } = getImageProps({
+  ...ARTE_MAPA,
+  src: IMAGENS.mapas.valeDoRibeiraMobile,
+  sizes: '100vw',
+});
 
 function rotuloCidade(cidade, situacao) {
   const missao = cidade.missao ? `: ${cidade.missao.titulo}` : '';
@@ -19,14 +38,16 @@ export default function MapaCena({ cidades, cidadeFoco, onCidade, children }) {
 
   return (
     <div className="mapa-cena">
-      <Image
-        className="mapa-cena__arte"
-        src={IMAGENS.mapas.valeDoRibeira}
-        alt="Mapa ilustrado do Vale do Ribeira com as cidades Eldorado, Sete Barras, Iporanga, Registro, Iguape e Cananéia"
-        fill
-        priority
-        sizes="(max-width: 430px) 100vw, 430px"
-      />
+      <picture>
+        <source media="(min-width: 600px)" srcSet={srcSetTablet} />
+        {/* fetchpriority em minúsculas: o React 18 não reconhece a prop fetchPriority. */}
+        <img
+          {...propsMapaMobile}
+          alt={propsMapaMobile.alt}
+          className="mapa-cena__arte"
+          fetchpriority="high"
+        />
+      </picture>
 
       {cidades.map((cidade) => {
         const situacao = situacaoMissao(cidade.missao);

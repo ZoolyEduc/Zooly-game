@@ -120,3 +120,23 @@
   background: #fff3e2;
   color: #b25e00;
 }
+
+/* Tablets: textos do painel proporcionais à coluna central. */
+@media (min-width: 600px) {
+  .cartao-pais--meta > b,
+  .cartao-pais--desempenho h3 {
+    font-size: 18px;
+  }
+
+  .titulo-recentes {
+    font-size: 17px;
+  }
+
+  .lista-recentes b {
+    font-size: 16px;
+  }
+
+  .lista-recentes em {
+    font-size: 13px;
+  }
+}

@@ -9,7 +9,9 @@ Imagens em `public/images/`. Todos os caminhos são centralizados em `config/ima
 | `marca/` | `logo-zooly-education.png` | `logo.png` | Logo "Zooly Education" (preservada, sem uso no app do aluno) |
 | `mascotes/` | `sarue.png`, `cobra.png`, `lagarto.png`, `papagaio.png` | mesmos nomes | Avatares, loja, introdução, mapa e feedbacks |
 | `cenarios/` | `fundo-floresta.png` | `fundo-floresta.png` | Fundo das telas de acesso e ilustração da história |
-| `mapas/` | `mapa-vale-do-ribeira.png` | `mapa.png` | Mapa das missões |
+| `mapas/` | `mapa-vale-do-ribeira.png` | `mapa.png` | Fundo da introdução |
+| `mapas/` | `mapa-mobile.png` (493x740) | — | Mapa das missões no celular |
+| `mapas/` | `mapa-tablet.png` (900x1351) | — | Mapa das missões no tablet (≥ 600px) |
 | `moedas/` | `moeda-banana.png` | `Group (3).png` | Moeda do cabeçalho, da loja e das recompensas |
 | `icones/` | `nav-inicio.png` | `Icon.png` | Referência do ícone da navegação (o app usa a versão vetorial equivalente) |
 | `icones/` | `nav-mapa.png` | `Icon (1).png` | Idem |
